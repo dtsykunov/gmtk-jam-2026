@@ -1,0 +1,67 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Godot-specific ignores
+.import/
+export.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation.godot/
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# Export folders
+exports/
+Exports/
+
+# IDE specific
+.vscode/
+.idea/
+
+# Plugin specific
+addons/script-ide/*
+
+# ---------------------------------------------------------------------------
+# Wwise
+# ---------------------------------------------------------------------------
+
+# Wwise temp/backup/lock files
+*.wproj.bak
+*.wwu.bak
+*.wproj.lock
+
+# ---------------------------------------------------------------------------
+# OS cruft (Windows / macOS / Linux colleagues)
+# ---------------------------------------------------------------------------
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.DocumentRevisions-V100
+
+# Linux
+*~
+.directory
+.Trash-*
+
+tmpfile
+
+**/*.tmp
+**/*.TMP
