@@ -28,9 +28,6 @@
 name: "Build and Publish Demo"
 
 on:
-  push:
-    branches:
-      - 'demo-version'
   workflow_dispatch:
 
 env:
@@ -54,7 +51,7 @@ jobs:
       - name: Checkout Demo Version
         uses: actions/checkout@v4
         with:
-          ref: 'demo-version'
+          ref: 'main'
           lfs: true
 
       - name: Setup
