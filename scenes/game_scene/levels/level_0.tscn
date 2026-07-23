@@ -14,4 +14,5 @@ script = ExtResource("2_64xdp")
 tutorial_scenes = Array[PackedScene]([ExtResource("3_64xdp")])
 
 [node name="Character" parent="." unique_id=1442930848 instance=ExtResource("4_n8sjt")]
-position = Vector2(895, 171)
+position = Vector2(913, 326)
+scale = Vector2(0.70742536, 0.70742536)
