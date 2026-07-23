@@ -1333,16 +1333,3 @@ parameters/head_blend/blend_amount = 0.0
 parameters/sit_hips_blend/blend_amount = 0.0
 parameters/stand_hips_blend/blend_amount = 0.0
 "parameters/Blend2 2/blend_amount" = 1.0
-
-[node name="Floor" type="Polygon2D" parent="." unique_id=1889229016]
-position = Vector2(-11.999999, 444)
-rotation = 0.0059992936
-polygon = PackedVector2Array(-262, -19, 476, -30, 474, 6, -267, 10)
-
-[node name="RLegPos" type="Marker2D" parent="Floor" unique_id=2116537219]
-position = Vector2(-75.894226, -37.311615)
-rotation = -0.012980633
-
-[node name="LLegPos" type="Marker2D" parent="Floor" unique_id=161741122]
-position = Vector2(121.77583, -37.73123)
-rotation = -0.012980633
