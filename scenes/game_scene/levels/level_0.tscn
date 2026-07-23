@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qi4qdfy4cte8" path="res://scenes/game_scene/levels/level.gd" id="1_xcm4a"]
 [ext_resource type="Script" uid="uid://bll85ag2um7hl" path="res://scenes/game_scene/tutorial_manager.gd" id="2_64xdp"]
+[ext_resource type="Script" uid="uid://cg4t4cqbtbxly" path="res://scenes/game_scene/game_controller.gd" id="2_c6vsw"]
 [ext_resource type="PackedScene" uid="uid://dngejn8k75r15" path="res://scenes/game_scene/tutorials/tutorial_0.tscn" id="3_64xdp"]
 [ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="4_n8sjt"]
 [ext_resource type="Script" uid="uid://bsigemijwx6en" path="res://scenes/character/player_controller.gd" id="5_b8k8o"]
@@ -9,18 +10,55 @@
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
 
+[node name="GameController" type="Node" parent="." unique_id=1296844016 node_paths=PackedStringArray("player", "enemy")]
+script = ExtResource("2_c6vsw")
+player = NodePath("Player")
+enemy = NodePath("Enemy")
+
+[node name="Countdown" type="Timer" parent="GameController" unique_id=593977127]
+wait_time = 5.0
+autostart = true
+
+[node name="Player" parent="GameController" unique_id=1442930848 instance=ExtResource("4_n8sjt")]
+position = Vector2(947, 320)
+scale = Vector2(0.70742536, 0.70742536)
+
+[node name="PlayerController" type="Node" parent="GameController/Player" unique_id=1825551759]
+script = ExtResource("5_b8k8o")
+
+[node name="Enemy" parent="GameController" unique_id=1412845564 instance=ExtResource("4_n8sjt")]
+position = Vector2(325, 326)
+scale = Vector2(0.70742536, 0.70742536)
+
 [node name="TutorialManager" type="Node" parent="." unique_id=1633152630]
 unique_name_in_owner = true
 script = ExtResource("2_64xdp")
 tutorial_scenes = Array[PackedScene]([ExtResource("3_64xdp")])
 
-[node name="Enemy" parent="." unique_id=1412845564 instance=ExtResource("4_n8sjt")]
-position = Vector2(325, 326)
-scale = Vector2(0.70742536, 0.70742536)
+[node name="Control" type="Control" parent="." unique_id=115013456]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Player" parent="." unique_id=1442930848 instance=ExtResource("4_n8sjt")]
-position = Vector2(947, 320)
-scale = Vector2(0.70742536, 0.70742536)
+[node name="ScoreLabel" type="Label" parent="Control" unique_id=737246843]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 633.0
+offset_top = 563.0
+offset_right = 682.0
+offset_bottom = 681.0
+theme_override_font_sizes/font_size = 86
+text = "0"
 
-[node name="PlayerController" type="Node" parent="Player" unique_id=1825551759]
-script = ExtResource("5_b8k8o")
+[node name="CountdownLabel" type="Label" parent="Control" unique_id=536489463]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 639.0
+offset_top = 46.0
+offset_right = 688.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]
