@@ -540,4 +540,4 @@ parameters/arm_l_blend/blend_amount = 0.0
 parameters/arm_r_blend/blend_amount = 0.0
 parameters/sit_blend/blend_amount = 0.0
 parameters/Blend2/blend_amount = 1.0
-parameters/head_blend/blend_amount = -1.0
+parameters/head_blend/blend_amount = 0.0
