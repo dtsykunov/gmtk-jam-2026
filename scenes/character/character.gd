@@ -16,6 +16,12 @@ enum HeadPose {
 	RIGHT,
 }
 
+enum HipsPose {
+	STRAIGHT,
+	LEFT,
+	RIGHT,
+}
+
 @onready var anim_player: AnimationPlayer = %AnimationPlayer
 @onready var anim_tree: AnimationTree = %AnimationTree
 
@@ -57,6 +63,18 @@ var head_pose := HeadPose.STRAIGHT:
 				anim_tree["parameters/head_blend/blend_amount"] = 0.0
 			HeadPose.RIGHT:
 				anim_tree["parameters/head_blend/blend_amount"] = 1.0
+
+var hip_pose := HipsPose.STRAIGHT:
+	set(value):
+		head_pose = value
+		match value:
+			HipsPose.LEFT:
+				anim_tree["parameters/sit_hips_blend/blend_amount"] = -1.0
+			HipsPose.STRAIGHT:
+				anim_tree["parameters/sit_hips_blend/blend_amount"] = 0.0
+			HipsPose.RIGHT:
+				anim_tree["parameters/sit_hips_blend/blend_amount"] = 1.0
+
 
 func has_same_stance(other: Character) -> bool:
 	return [arm_l, arm_r, stance, head_pose] == [other.arm_l, other.arm_r, other.stance, other.head_pose]
