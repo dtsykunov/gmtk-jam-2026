@@ -64,23 +64,27 @@ var head_pose := HeadPose.STRAIGHT:
 			HeadPose.RIGHT:
 				anim_tree["parameters/head_blend/blend_amount"] = 1.0
 
-var hip_pose := HipsPose.STRAIGHT:
+var hips_pose := HipsPose.STRAIGHT:
 	set(value):
-		head_pose = value
+		hips_pose = value
 		match value:
 			HipsPose.LEFT:
+				anim_tree["parameters/stand_hips_blend/blend_amount"] = -1.0
 				anim_tree["parameters/sit_hips_blend/blend_amount"] = -1.0
 			HipsPose.STRAIGHT:
+				anim_tree["parameters/stand_hips_blend/blend_amount"] = 0.0
 				anim_tree["parameters/sit_hips_blend/blend_amount"] = 0.0
 			HipsPose.RIGHT:
+				anim_tree["parameters/stand_hips_blend/blend_amount"] = 1.0
 				anim_tree["parameters/sit_hips_blend/blend_amount"] = 1.0
 
 
 func has_same_stance(other: Character) -> bool:
-	return [arm_l, arm_r, stance, head_pose] == [other.arm_l, other.arm_r, other.stance, other.head_pose]
+	return [arm_l, arm_r, stance, head_pose, hips_pose] == [other.arm_l, other.arm_r, other.stance, other.head_pose, other.hips_pose]
 
 func randomize() -> void:
 	arm_l = ArmPose.values().pick_random()
 	arm_r = ArmPose.values().pick_random()
 	stance = Stance.values().pick_random()
-	head_pose = HeadPose.values().pick_random()
+	hips_pose = HipsPose.values().pick_random()
+	# head_pose = HeadPose.values().pick_random()
