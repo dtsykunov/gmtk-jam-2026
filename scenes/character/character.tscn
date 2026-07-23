@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://k44r4j8xt4x8"]
+
+[ext_resource type="Script" uid="uid://7grgr5ychi2m" path="res://scenes/character/character.gd" id="1_cuyo6"]
+
+[node name="Node2D" type="Node2D" unique_id=1442930848]
+script = ExtResource("1_cuyo6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=982612043]
+
+[node name="Hip" type="Polygon2D" parent="." unique_id=2069769043]
+position = Vector2(5, 54)
+color = Color(0.50534403, 0.5053441, 0.50534403, 1)
+offset = Vector2(46, -28)
+polygon = PackedVector2Array(-110.5, -15.5, -99.5, 72.5, 6.5, 74.5, 18.5, -16.5)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Torso" type="Polygon2D" parent="Hip" unique_id=1272831489]
+position = Vector2(-2, -14)
+color = Color(0.5580082, 0.4764248, 0.55037814, 1)
+offset = Vector2(58, -63)
+polygon = PackedVector2Array(-139.5, -124.5, -99.5, 72.5, -9.5, 71.5, 29.5, -124.5)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Arm_L" type="Polygon2D" parent="Hip/Torso" unique_id=903936699]
+position = Vector2(71, -170)
+rotation = -0.26876748
+color = Color(0.59361523, 0.43052393, 0.66665953, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-77.78115, -116.04665, -67.077126, 39.17981, -33.73799, 34.878357, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="ForeArm_L" type="Polygon2D" parent="Hip/Torso/Arm_L" unique_id=1672087684]
+position = Vector2(3.385477, 153.40645)
+color = Color(0.340851, 0.5588388, 0.4546095, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-77.78115, -116.04665, -67.15856, 1.816803, -47.778496, 3.005722, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Hand_L" type="Polygon2D" parent="Hip/Torso/Arm_L/ForeArm_L" unique_id=2114508134]
+position = Vector2(-2.3537827, 98.92653)
+color = Color(0.2576176, 0.55334276, 0.62277114, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-77.78115, -116.04665, -71.87637, -75.20099, -36.707123, -74.84943, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Arm_R" type="Polygon2D" parent="Hip/Torso" unique_id=1625613101]
+position = Vector2(-71, -172.00002)
+rotation = 0.26452547
+color = Color(0.59361523, 0.43052393, 0.66665953, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-77.78115, -116.04665, -67.077126, 39.17981, -33.73799, 34.878357, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="ForeArm_R" type="Polygon2D" parent="Hip/Torso/Arm_R" unique_id=242941437]
+position = Vector2(3.385477, 153.40645)
+color = Color(0.340851, 0.5588388, 0.4546095, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-77.78115, -116.04665, -67.15856, 1.816803, -47.778496, 3.005722, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Hand_R" type="Polygon2D" parent="Hip/Torso/Arm_R/ForeArm_R" unique_id=1714065228]
+position = Vector2(-2.3537827, 98.92653)
+color = Color(0.2576176, 0.55334276, 0.62277114, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-77.78115, -116.04665, -71.87637, -75.20099, -36.707123, -74.84943, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Leg_R" type="Polygon2D" parent="Hip/Torso" unique_id=553225462]
+position = Vector2(-30, 53)
+rotation = 0.095459476
+color = Color(0.59361523, 0.43052393, 0.66665953, 1)
+offset = Vector2(48.432617, 132.28601)
+polygon = PackedVector2Array(-77.78115, -116.04665, -67.077126, 39.17981, -18.789543, 32.868927, -24.666962, -118.87248)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Sheen_R" type="Polygon2D" parent="Hip/Torso/Leg_R" unique_id=2021549549]
+position = Vector2(-6.935453, 158.38211)
+rotation = -0.10164873
+color = Color(0.340851, 0.5588388, 0.4546095, 1)
+offset = Vector2(64.42502, 134.86559)
+polygon = PackedVector2Array(-77.78115, -116.04665, -74.26039, 0.076156616, -41.267212, 1.2803802, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Foot_R" type="Polygon2D" parent="Hip/Torso/Leg_R/Sheen_R" unique_id=126921144]
+position = Vector2(2.2015328, 129.01611)
+color = Color(0.2576176, 0.55334276, 0.62277114, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-73.274796, -114.78644, -121.47193, -83.08414, -28.47371, -82.508545, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Leg_L" type="Polygon2D" parent="Hip/Torso" unique_id=1162900877]
+position = Vector2(34, 52)
+rotation = 0.02025368
+color = Color(0.59361523, 0.43052393, 0.66665953, 1)
+offset = Vector2(48.432617, 132.28601)
+polygon = PackedVector2Array(-77.78115, -116.04665, -67.077126, 39.17981, -18.789543, 32.868927, -24.666962, -118.87248)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Sheen_L" type="Polygon2D" parent="Hip/Torso/Leg_L" unique_id=1890065902]
+position = Vector2(-6.935453, 158.38211)
+rotation = -0.10164873
+color = Color(0.340851, 0.5588388, 0.4546095, 1)
+offset = Vector2(64.42502, 134.86559)
+polygon = PackedVector2Array(-77.78115, -116.04665, -74.26039, 0.076156616, -41.267212, 1.2803802, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Foot_L" type="Polygon2D" parent="Hip/Torso/Leg_L/Sheen_L" unique_id=139456778]
+position = Vector2(2.2015328, 129.01611)
+color = Color(0.2576176, 0.55334276, 0.62277114, 1)
+offset = Vector2(56.237984, 120.68112)
+polygon = PackedVector2Array(-73.274796, -114.78644, -83.49994, -83.50009, 28.500061, -85.50009, -28.25048, -119.469086)
+uv = PackedVector2Array(-133.5, -67.5, -141.5, 85.5, 34.5, 84.5, 53.5, -49.5)
+
+[node name="Polygon2D" type="Polygon2D" parent="Hip" unique_id=1044599057]
+position = Vector2(64, -208)
+polygon = PackedVector2Array(-58.5, -99.5, -108.5, -76.5, -111.5, -36.5, -55.5, -11.5, -18.5, -53.5)
+uv = PackedVector2Array(-44.5, -106.5, -117.5, -79.5, -113.5, -30.5, -50.5, 1.5, 3.5, -53.5)
