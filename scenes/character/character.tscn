@@ -268,12 +268,12 @@ filter_enabled = true
 filters = ["", "Hip/Torso/Leg_L/Sheen_L/Foot_L:rotation", "Hip/Torso/Leg_L/Sheen_L:rotation", "Hip/Torso/Leg_L:rotation", "Hip/Torso/Leg_R/Sheen_R/Foot_R:rotation", "Hip/Torso/Leg_R/Sheen_R:rotation", "Hip/Torso/Leg_R:rotation", "Hip:position"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_od15b"]
-graph_offset = Vector2(-180.14029, 609.899)
+graph_offset = Vector2(-195.87866, 845.65454)
 nodes/output/position = Vector2(960, 1140)
-"nodes/Blend2 L/node" = SubResource("AnimationNodeBlend2_f8hpl")
-"nodes/Blend2 L/position" = Vector2(240, 1100)
-"nodes/Blend2 R/node" = SubResource("AnimationNodeBlend2_fgi2k")
-"nodes/Blend2 R/position" = Vector2(460, 1380)
+nodes/arm_l_blend/node = SubResource("AnimationNodeBlend2_f8hpl")
+nodes/arm_l_blend/position = Vector2(240, 1100)
+nodes/arm_r_blend/node = SubResource("AnimationNodeBlend2_fgi2k")
+nodes/arm_r_blend/position = Vector2(460, 1380)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_mutn8")
 nodes/Animation/position = Vector2(0, 1340)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_6nn2t")
@@ -282,9 +282,9 @@ nodes/Animation/position = Vector2(0, 1340)
 "nodes/Animation 3/position" = Vector2(0, 1580)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_fgi2k")
 "nodes/Animation 4/position" = Vector2(0, 1800)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_7ex5l")
-nodes/Blend2/position = Vector2(720, 1660)
-node_connections = [&"output", 0, &"Blend2", &"Blend2 L", 0, &"Animation 2", &"Blend2 L", 1, &"Animation", &"Blend2 R", 0, &"Blend2 L", &"Blend2 R", 1, &"Animation 3", &"Blend2", 0, &"Blend2 R", &"Blend2", 1, &"Animation 4"]
+nodes/sit_blend/node = SubResource("AnimationNodeBlend2_7ex5l")
+nodes/sit_blend/position = Vector2(720, 1660)
+node_connections = [&"output", 0, &"sit_blend", &"arm_l_blend", 0, &"Animation 2", &"arm_l_blend", 1, &"Animation", &"arm_r_blend", 0, &"arm_l_blend", &"arm_r_blend", 1, &"Animation 3", &"sit_blend", 0, &"arm_r_blend", &"sit_blend", 1, &"Animation 4"]
 
 [node name="Node2D" type="Node2D" unique_id=1442930848]
 script = ExtResource("1_cuyo6")
@@ -457,11 +457,13 @@ offset = Vector2(-55.54026, 13.270245)
 polygon = PackedVector2Array(-2.347699, -52.947983, 5.1326885, -42.268852, -2.8151634, -40.91546)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=426517758]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_mutn8")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1224880143]
+unique_name_in_owner = true
 tree_root = SubResource("AnimationNodeBlendTree_od15b")
 anim_player = NodePath("../AnimationPlayer")
-"parameters/Blend2 L/blend_amount" = 0.0
-"parameters/Blend2 R/blend_amount" = 0.0
-parameters/Blend2/blend_amount = 0.0
+parameters/arm_l_blend/blend_amount = 0.0
+parameters/arm_r_blend/blend_amount = 0.0
+parameters/sit_blend/blend_amount = 0.0
