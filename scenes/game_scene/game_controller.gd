@@ -12,18 +12,12 @@ var score := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	give_enemy_random_stance()
+	enemy.randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	countdown_label.text = str(ceili(countdown.time_left))
-
-
-func give_enemy_random_stance() -> void:
-	enemy.arm_l = Character.ArmPose.values().pick_random()
-	enemy.arm_r = Character.ArmPose.values().pick_random()
-	enemy.stance = Character.Stance.values().pick_random()
 
 
 func _on_countdown_timeout() -> void:
@@ -32,4 +26,4 @@ func _on_countdown_timeout() -> void:
 		score_label.text = str(score)
 
 	countdown.start()
-	give_enemy_random_stance()
+	enemy.randomize()

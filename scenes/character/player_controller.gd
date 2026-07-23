@@ -24,3 +24,12 @@ func _process(_delta: float) -> void:
 		character.arm_r = Character.ArmPose.RAISED
 	elif Input.is_action_just_released("move_left"):
 		character.arm_r = Character.ArmPose.LOWERED
+
+	if Input.is_action_pressed("head_left") and Input.is_action_pressed("head_right"):
+		character.head_pose = Character.HeadPose.STRAIGHT
+	elif Input.is_action_pressed("head_left"):
+		character.head_pose = Character.HeadPose.LEFT
+	elif Input.is_action_pressed("head_right"):
+		character.head_pose = Character.HeadPose.RIGHT
+	else:
+		character.head_pose = Character.HeadPose.STRAIGHT

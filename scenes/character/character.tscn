@@ -112,6 +112,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Hip/Head:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.044310704]
+}
 
 [sub_resource type="Animation" id="Animation_cuyo6"]
 resource_name = "arm_l_up"
@@ -143,6 +155,38 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.26452547, 2.7925267]
+}
+
+[sub_resource type="Animation" id="Animation_f8hpl"]
+resource_name = "head_l"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hip/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.044310704, -0.77318084]
+}
+
+[sub_resource type="Animation" id="Animation_7ex5l"]
+resource_name = "head_r"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hip/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.044310704, 0.8237954]
 }
 
 [sub_resource type="Animation" id="Animation_fgi2k"]
@@ -238,6 +282,8 @@ _data = {
 &"RESET": SubResource("Animation_6nn2t"),
 &"arm_l_up": SubResource("Animation_cuyo6"),
 &"arm_r_up": SubResource("Animation_mutn8"),
+&"head_l": SubResource("Animation_f8hpl"),
+&"head_r": SubResource("Animation_7ex5l"),
 &"sit": SubResource("Animation_fgi2k")
 }
 
@@ -250,8 +296,21 @@ animation = &"arm_r_up"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fgi2k"]
 animation = &"sit"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f8hpl"]
+animation = &"head_l"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7ex5l"]
+animation = &"head_r"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bix7t"]
+animation = &"RESET"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mutn8"]
 animation = &"arm_l_up"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_bblvu"]
+filter_enabled = true
+filters = ["Hip/Head:rotation"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_f8hpl"]
 filter_enabled = true
@@ -263,13 +322,15 @@ filter_enabled = true
 filters = ["Hip/Torso/arm_r:rotation"]
 sync = true
 
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_q52vl"]
+
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_7ex5l"]
 filter_enabled = true
 filters = ["", "Hip/Torso/Leg_L/Sheen_L/Foot_L:rotation", "Hip/Torso/Leg_L/Sheen_L:rotation", "Hip/Torso/Leg_L:rotation", "Hip/Torso/Leg_R/Sheen_R/Foot_R:rotation", "Hip/Torso/Leg_R/Sheen_R:rotation", "Hip/Torso/Leg_R:rotation", "Hip:position"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_od15b"]
-graph_offset = Vector2(-195.87866, 845.65454)
-nodes/output/position = Vector2(960, 1140)
+graph_offset = Vector2(229.91809, 1598.9226)
+nodes/output/position = Vector2(1800, 1780)
 nodes/arm_l_blend/node = SubResource("AnimationNodeBlend2_f8hpl")
 nodes/arm_l_blend/position = Vector2(240, 1100)
 nodes/arm_r_blend/node = SubResource("AnimationNodeBlend2_fgi2k")
@@ -284,7 +345,17 @@ nodes/Animation/position = Vector2(0, 1340)
 "nodes/Animation 4/position" = Vector2(0, 1800)
 nodes/sit_blend/node = SubResource("AnimationNodeBlend2_7ex5l")
 nodes/sit_blend/position = Vector2(720, 1660)
-node_connections = [&"output", 0, &"sit_blend", &"arm_l_blend", 0, &"Animation 2", &"arm_l_blend", 1, &"Animation", &"arm_r_blend", 0, &"arm_l_blend", &"arm_r_blend", 1, &"Animation 3", &"sit_blend", 0, &"arm_r_blend", &"sit_blend", 1, &"Animation 4"]
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_7ex5l")
+"nodes/Animation 6/position" = Vector2(380, 2420)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_f8hpl")
+"nodes/Animation 5/position" = Vector2(400, 1940)
+"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_bix7t")
+"nodes/Animation 7/position" = Vector2(400, 2160)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_bblvu")
+nodes/Blend2/position = Vector2(1280, 2040)
+nodes/head_blend/node = SubResource("AnimationNodeBlend3_q52vl")
+nodes/head_blend/position = Vector2(660, 2100)
+node_connections = [&"output", 0, &"Blend2", &"arm_l_blend", 0, &"Animation 2", &"arm_l_blend", 1, &"Animation", &"arm_r_blend", 0, &"arm_l_blend", &"arm_r_blend", 1, &"Animation 3", &"sit_blend", 0, &"arm_r_blend", &"sit_blend", 1, &"Animation 4", &"Blend2", 0, &"sit_blend", &"Blend2", 1, &"head_blend", &"head_blend", 0, &"Animation 5", &"head_blend", 1, &"Animation 7", &"head_blend", 2, &"Animation 6"]
 
 [node name="Node2D" type="Node2D" unique_id=1442930848]
 script = ExtResource("1_cuyo6")
@@ -462,8 +533,11 @@ libraries/ = SubResource("AnimationLibrary_mutn8")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1224880143]
 unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_od15b")
 anim_player = NodePath("../AnimationPlayer")
 parameters/arm_l_blend/blend_amount = 0.0
 parameters/arm_r_blend/blend_amount = 0.0
 parameters/sit_blend/blend_amount = 0.0
+parameters/Blend2/blend_amount = 1.0
+parameters/head_blend/blend_amount = -1.0
