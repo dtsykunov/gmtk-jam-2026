@@ -12,7 +12,7 @@ extends Node
 var score := 0
 
 var cur_difficulty := 0
-var cur_moves := []
+var cur_moves: Array[Character.Move] = []
 
 const LEVEL_0 := [10, 5.0, Character.MoveDifficulty.EASY]
 const LEVEL_1 := [10, 5.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]

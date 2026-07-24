@@ -1,6 +1,6 @@
 class_name Character extends Node2D
 
-signal move_changed(new_move: Array)
+signal move_changed(new_move: Move)
 
 enum Stance {
 	SITTING,
@@ -31,55 +31,55 @@ enum MoveDifficulty {
 	ALL = EASY | MEDIUM | HARD,
 }
 
-const DEFAULT_MOVE := [Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT]
+static var DEFAULT_MOVE := Move.new(Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT)
 
 # one button pressed at most
-const EASY_MOVES := [
+static var EASY_MOVES: Array[Move] = [
 	# stance, arm_l, arm_r, hips
 	# DEFAULT_MOVE,
-	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT],
+	Move.new(Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT),
 
-	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT],
-	[Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.STRAIGHT],
-	[Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.LEFT],
-	[Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.RIGHT],
+	Move.new(Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT),
+	Move.new(Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.STRAIGHT),
+	Move.new(Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.LEFT),
+	Move.new(Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.RIGHT),
 ]
 
 # two buttons pressed
-const MEDIUM_MOVES := [
-	[Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT],
-	[Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.STRAIGHT],
+static var MEDIUM_MOVES: Array[Move] = [
+	Move.new(Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT),
+	Move.new(Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.STRAIGHT),
 
-	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.LEFT],
-	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.RIGHT],
+	Move.new(Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.LEFT),
+	Move.new(Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.RIGHT),
 
-	[Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.STRAIGHT],
+	Move.new(Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.STRAIGHT),
 
-	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.LEFT],
-	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.RIGHT],
+	Move.new(Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.LEFT),
+	Move.new(Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.RIGHT),
 
-	[Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.LEFT],
-	[Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.RIGHT],
+	Move.new(Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.LEFT),
+	Move.new(Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.RIGHT),
 ]
 
 # three or more buttons pressed
-const HARD_MOVES := [
-	[Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.STRAIGHT],
+static var HARD_MOVES: Array[Move] = [
+	Move.new(Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.STRAIGHT),
 
-	[Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.LEFT],
-	[Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.RIGHT],
+	Move.new(Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.LEFT),
+	Move.new(Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.RIGHT),
 
-	[Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.LEFT],
-	[Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.RIGHT],
+	Move.new(Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.LEFT),
+	Move.new(Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.RIGHT),
 
-	[Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.LEFT],
-	[Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.RIGHT],
+	Move.new(Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.LEFT),
+	Move.new(Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.RIGHT),
 
-	[Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.LEFT],
-	[Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.RIGHT],
+	Move.new(Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.LEFT),
+	Move.new(Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.RIGHT),
 ]
-	
-const MOVES := {
+
+static var MOVES: Dictionary[MoveDifficulty, Array] = {
 	MoveDifficulty.EASY: EASY_MOVES,
 	MoveDifficulty.MEDIUM: MEDIUM_MOVES,
 	MoveDifficulty.HARD: HARD_MOVES,
@@ -155,22 +155,22 @@ func randomize() -> void:
 	hips = HipsPose.values().pick_random()
 	# head_pose = HeadPose.values().pick_random()
 
-static func get_pool(difficulty: int) -> Array:
-	var out: Array = []
+static func get_pool(difficulty: int) -> Array[Move]:
+	var out: Array[Move] = []
 	for d: MoveDifficulty in MOVES:
 		if difficulty & d:
 			out.append_array(MOVES[d])
 	return out
 
 
-static func randomize_moves(difficulty: int, count: int, allow_repeats := false) -> Array:
+static func randomize_moves(difficulty: int, count: int, allow_repeats := false) -> Array[Move]:
 	var pool := get_pool(difficulty)
 	assert(not pool.is_empty(), "No moves for difficulty %d" % difficulty)
 
-	var out: Array = []
-	var last: Array = []
+	var out: Array[Move] = []
+	var last: Move = null
 	for i in count:
-		var move: Array = pool.pick_random()
+		var move: Move = pool.pick_random()
 		if not allow_repeats and pool.size() > 1:
 			while move == last:
 				move = pool.pick_random()
@@ -178,14 +178,25 @@ static func randomize_moves(difficulty: int, count: int, allow_repeats := false)
 		last = move
 	return out
 
-func apply_move(poses: Array) -> void:
-	# poses = [stance, arm_l, arm_r, hips]
-	assert(len(poses) == 4, "Unexpected move array")
-	stance = poses[0]
-	arm_l = poses[1]
-	arm_r = poses[2]
-	hips = poses[3]
-	# head_pose = poses[4]
+func apply_move(move: Move) -> void:
+	stance = move.stance
+	arm_l = move.arm_l
+	arm_r = move.arm_r
+	hips = move.hips
+	# head_pose = move.head_pose
 
-func get_move() -> Array:
-	return [stance, arm_l, arm_r, hips]
+func get_move() -> Move:
+	return Move.new(stance, arm_l, arm_r, hips)
+
+
+class Move:
+	var stance: Stance
+	var arm_l: ArmPose
+	var arm_r: ArmPose
+	var hips: HipsPose
+
+	func _init(p_stance: Stance, p_arm_l: ArmPose, p_arm_r: ArmPose, p_hips: HipsPose) -> void:
+		stance = p_stance
+		arm_l = p_arm_l
+		arm_r = p_arm_r
+		hips = p_hips
