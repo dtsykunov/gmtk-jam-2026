@@ -10,19 +10,21 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("move_down"):
+	if Input.is_action_pressed("hips_down"):
 		character.stance = Character.Stance.SITTING
-	elif Input.is_action_just_released("move_down"):
+	else:
 		character.stance = Character.Stance.STANDING
 
-	if Input.is_action_just_pressed("move_right"):
+	# camera right
+	if Input.is_action_pressed("right_arm_up"):
 		character.arm_l = Character.ArmPose.RAISED
-	elif Input.is_action_just_released("move_right"):
+	else:
 		character.arm_l = Character.ArmPose.LOWERED
 
-	if Input.is_action_just_pressed("move_left"):
+	# camera left
+	if Input.is_action_pressed("left_arm_up"):
 		character.arm_r = Character.ArmPose.RAISED
-	elif Input.is_action_just_released("move_left"):
+	else:
 		character.arm_r = Character.ArmPose.LOWERED
 
 	if Input.is_action_pressed("head_left") and Input.is_action_pressed("head_right"):
