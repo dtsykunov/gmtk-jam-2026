@@ -20,6 +20,8 @@ signal countdown_started
 @onready var enemy_move_control: MoveControl = %EnemyMoveControl
 @onready var player_move_control: MoveControl = %PlayerMoveControl
 
+@onready var move_history: MoveHistory = %MoveHistory
+
 var score := 0
 
 var cur_difficulty := 0

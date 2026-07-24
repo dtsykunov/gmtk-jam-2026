@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bsigemijwx6en" path="res://scenes/character/player_controller.gd" id="5_b8k8o"]
 [ext_resource type="Script" uid="uid://1yh65qh4gdld" path="res://scenes/character/enemy.gd" id="6_enemyc"]
 [ext_resource type="PackedScene" uid="uid://cukerjdra6irn" path="res://scenes/game_scene/move_control/move_control.tscn" id="8_njun1"]
+[ext_resource type="PackedScene" uid="uid://booopyflpmbje" path="res://scenes/game_scene/move_history/move_history.tscn" id="9_vyne5"]
 
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
@@ -54,27 +55,40 @@ layer = 2
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=115013456]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/Control" unique_id=737246843]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 633.0
-offset_top = 563.0
-offset_right = 682.0
-offset_bottom = 681.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -142.0
+offset_right = 25.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 86
 text = "0"
 
 [node name="CountdownLabel" type="Label" parent="CanvasLayer/Control" unique_id=536489463]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 639.0
-offset_top = 46.0
-offset_right = 688.0
-offset_bottom = 164.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 21.0
+offset_right = 25.0
+offset_bottom = 139.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 86
 text = "0"
 
@@ -90,18 +104,41 @@ text = "YOU"
 [node name="EnemyMoveControl" parent="CanvasLayer/Control" unique_id=1829965493 instance=ExtResource("8_njun1")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 186.0
-offset_top = 565.0
-offset_right = 454.0
-offset_bottom = 629.0
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = -120.0
+offset_right = 468.0
+offset_bottom = -56.0
+grow_horizontal = 1
+grow_vertical = 0
 
 [node name="PlayerMoveControl" parent="CanvasLayer/Control" unique_id=1504027257 instance=ExtResource("8_njun1")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 822.0
-offset_top = 565.0
-offset_right = 1090.0
-offset_bottom = 629.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -424.0
+offset_top = -120.0
+offset_right = -155.99951
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MoveHistory" parent="CanvasLayer/Control" unique_id=852309209 instance=ExtResource("9_vyne5")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -67.0
+offset_top = -176.0
+offset_right = 201.0
+offset_bottom = 568.0
+scale = Vector2(0.5, 0.5)
 
 [connection signal="timeout" from="GameController/StartTimer" to="GameController" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]
