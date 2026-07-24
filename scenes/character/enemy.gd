@@ -2,6 +2,7 @@ class_name EnemyController
 extends Node
 
 signal moves_shown
+signal move_changed(move: Move)
 
 @onready var character: Character = get_parent()
 @onready var move_timer: Timer = $MoveTimer
@@ -19,6 +20,7 @@ func show_round(moves: Array[Move], move_show_time: float) -> void:
 
 func _show_next() -> void:
 	character.apply_move(_moves[_index])
+	move_changed.emit(_moves[_index])
 	_index += 1
 	move_timer.start()
 

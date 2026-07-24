@@ -1,3 +1,4 @@
+class_name MoveControl
 extends Control
 
 @export_dir var assets_dir : String = "res://assets/kenney_input_prompts"
@@ -9,7 +10,7 @@ const KEY_ICON_FILES := {
 	KEY_D: "keyboard_d.png",
 	KEY_LEFT: "keyboard_arrow_left.png",
 	KEY_RIGHT: "keyboard_arrow_right.png",
-	KEY_DOWN: "keyboard_arrows_down.png",
+	KEY_DOWN: "keyboard_arrow_down.png",
 	KEY_UP: "keyboard_arrow_up.png",
 }
 

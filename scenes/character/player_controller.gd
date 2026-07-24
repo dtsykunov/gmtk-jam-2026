@@ -1,6 +1,7 @@
 class_name PlayerController
 extends Node
 
+signal move_changed(move: Move)
 
 @export var min_hold_duration := 0.5
 
@@ -57,6 +58,7 @@ func _process(delta: float) -> void:
 		_finalize_current_move()
 		_current_move = new_move
 		_current_hold_time = 0.0
+		move_changed.emit(_current_move)
 	else:
 		_current_hold_time += delta
 
@@ -65,6 +67,7 @@ func pause_input() -> void:
 	_paused = true
 	_finalize_current_move()
 	character.apply_move(Character.DEFAULT_MOVE)
+	move_changed.emit(Character.DEFAULT_MOVE)
 
 
 func unpause_input() -> void:

@@ -17,6 +17,9 @@ signal countdown_started
 @onready var countdown_label: Label = %CountdownLabel
 @onready var score_label: Label = %ScoreLabel
 
+@onready var enemy_move_control: MoveControl = %EnemyMoveControl
+@onready var player_move_control: MoveControl = %PlayerMoveControl
+
 var score := 0
 
 var cur_difficulty := 0
@@ -41,6 +44,9 @@ func _ready() -> void:
 	countdown_started.connect(player_controller.unpause_input)
 	round_finished.connect(player_controller.pause_input.unbind(1))
 	enemy_controller.moves_shown.connect(_on_enemy_moves_shown)
+
+	player_controller.move_changed.connect(player_move_control.apply_move)
+	enemy_controller.move_changed.connect(enemy_move_control.apply_move)
 
 	start_timer.start()
 

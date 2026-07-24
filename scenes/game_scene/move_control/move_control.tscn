@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cukerjdra6irn"]
 
 [ext_resource type="Texture2D" uid="uid://cwmi7n6eswutd" path="res://assets/kenney_input_prompts/keyboard_a.png" id="1_8wfs0"]
-[ext_resource type="Script" uid="uid://58trs0170k8o" path="res://scenes/game_scene/move_control/move_container.gd" id="1_r02cg"]
+[ext_resource type="Script" uid="uid://58trs0170k8o" path="res://scenes/game_scene/move_control/move_control.gd" id="1_r02cg"]
 
-[node name="MoveContainer" type="MarginContainer" unique_id=1829965493]
+[node name="MarginContainer" type="MarginContainer" unique_id=1829965493]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

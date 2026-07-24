@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="4_n8sjt"]
 [ext_resource type="Script" uid="uid://bsigemijwx6en" path="res://scenes/character/player_controller.gd" id="5_b8k8o"]
 [ext_resource type="Script" uid="uid://1yh65qh4gdld" path="res://scenes/character/enemy.gd" id="6_enemyc"]
+[ext_resource type="PackedScene" uid="uid://cukerjdra6irn" path="res://scenes/game_scene/move_control/move_control.tscn" id="8_njun1"]
 
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
@@ -48,13 +49,16 @@ unique_name_in_owner = true
 script = ExtResource("2_64xdp")
 tutorial_scenes = Array[PackedScene]([ExtResource("3_64xdp")])
 
-[node name="Control" type="Control" parent="." unique_id=115013456]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=445704680]
+layer = 2
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=115013456]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ScoreLabel" type="Label" parent="Control" unique_id=737246843]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Control" unique_id=737246843]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 633.0
@@ -64,7 +68,7 @@ offset_bottom = 681.0
 theme_override_font_sizes/font_size = 86
 text = "0"
 
-[node name="CountdownLabel" type="Label" parent="Control" unique_id=536489463]
+[node name="CountdownLabel" type="Label" parent="CanvasLayer/Control" unique_id=536489463]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 639.0
@@ -74,13 +78,30 @@ offset_bottom = 164.0
 theme_override_font_sizes/font_size = 86
 text = "0"
 
-[node name="Label" type="Label" parent="." unique_id=683467092]
-offset_left = 913.0
-offset_top = 637.0
-offset_right = 1025.0
-offset_bottom = 710.0
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=683467092]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 65.0
+offset_right = 1030.0
+offset_bottom = 138.0
 theme_override_font_sizes/font_size = 53
 text = "YOU"
+
+[node name="EnemyMoveControl" parent="CanvasLayer/Control" unique_id=1829965493 instance=ExtResource("8_njun1")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 186.0
+offset_top = 565.0
+offset_right = 454.0
+offset_bottom = 629.0
+
+[node name="PlayerMoveControl" parent="CanvasLayer/Control" unique_id=1504027257 instance=ExtResource("8_njun1")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 822.0
+offset_top = 565.0
+offset_right = 1090.0
+offset_bottom = 629.0
 
 [connection signal="timeout" from="GameController/StartTimer" to="GameController" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]
