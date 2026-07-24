@@ -24,6 +24,7 @@ one_shot = true
 
 [node name="Countdown" type="Timer" parent="GameController" unique_id=593977127]
 wait_time = 5.0
+one_shot = true
 
 [node name="Player" parent="GameController" unique_id=1442930848 instance=ExtResource("4_n8sjt")]
 position = Vector2(947, 320)
