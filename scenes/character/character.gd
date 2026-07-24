@@ -200,3 +200,11 @@ class Move:
 
 	func equals(other: Move) -> bool:
 		return stance == other.stance and arm_l == other.arm_l and arm_r == other.arm_r and hips == other.hips
+
+	func _to_string() -> String:
+		return "Move(stance=%s, arm_l=%s, arm_r=%s, hips=%s)" % [
+			Stance.keys()[stance],
+			ArmPose.keys()[arm_l],
+			ArmPose.keys()[arm_r],
+			HipsPose.keys()[hips],
+		]

@@ -2,7 +2,7 @@ class_name PlayerController
 extends Node
 
 
-@export var min_hold_duration := 0.15
+@export var min_hold_duration := 0.5
 
 @onready var character : Character = get_parent()
 
@@ -78,5 +78,8 @@ func get_recorded_moves() -> Array[Character.Move]:
 
 
 func _finalize_current_move() -> void:
-	if _current_move != null and _current_hold_time >= min_hold_duration:
-		_recorded_moves.append(_current_move)
+	if _current_move == null or _current_hold_time < min_hold_duration:
+		return
+	if _current_move.equals(Character.DEFAULT_MOVE):
+		return
+	_recorded_moves.append(_current_move)
