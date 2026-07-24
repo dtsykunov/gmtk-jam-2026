@@ -7,9 +7,9 @@ extends Node
 @onready var character : Character = get_parent()
 
 var _paused := true
-var _current_move: Character.Move
+var _current_move: Move
 var _current_hold_time := 0.0
-var _recorded_moves: Array[Character.Move] = []
+var _recorded_moves: Array[Move] = []
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	else:
 		character.hips = Character.HipsPose.STRAIGHT
 
-	var new_move := Character.Move.new(character.stance, character.arm_l, character.arm_r, character.hips)
+	var new_move := Move.new(character.stance, character.arm_l, character.arm_r, character.hips)
 	if _current_move == null or not new_move.equals(_current_move):
 		_finalize_current_move()
 		_current_move = new_move
@@ -74,7 +74,7 @@ func unpause_input() -> void:
 	_current_hold_time = 0.0
 
 
-func get_recorded_moves() -> Array[Character.Move]:
+func get_recorded_moves() -> Array[Move]:
 	return _recorded_moves
 
 

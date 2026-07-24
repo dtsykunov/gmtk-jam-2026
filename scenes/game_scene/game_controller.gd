@@ -96,7 +96,7 @@ func setup_level() -> void:
 	lvl_rounds = next_lvl_rounds
 
 
-func _moves_match(recorded: Array[Character.Move], round_moves: Array[Character.Move]) -> bool:
+func _moves_match(recorded: Array[Move], round_moves: Array[Move]) -> bool:
 	if round_moves.size() == 1:
 		if recorded.is_empty():
 			return false
@@ -111,9 +111,9 @@ func _moves_match(recorded: Array[Character.Move], round_moves: Array[Character.
 
 
 class Round:
-	var moves: Array[Character.Move]
+	var moves: Array[Move]
 
-	func _init(p_moves: Array[Character.Move]) -> void:
+	func _init(p_moves: Array[Move]) -> void:
 		assert(len(p_moves) > 0)
 		moves = p_moves
 

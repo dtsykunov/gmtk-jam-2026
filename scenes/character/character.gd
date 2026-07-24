@@ -184,27 +184,3 @@ func apply_move(move: Move) -> void:
 
 func get_move() -> Move:
 	return Move.new(stance, arm_l, arm_r, hips)
-
-
-class Move:
-	var stance: Stance
-	var arm_l: ArmPose
-	var arm_r: ArmPose
-	var hips: HipsPose
-
-	func _init(p_stance: Stance, p_arm_l: ArmPose, p_arm_r: ArmPose, p_hips: HipsPose) -> void:
-		stance = p_stance
-		arm_l = p_arm_l
-		arm_r = p_arm_r
-		hips = p_hips
-
-	func equals(other: Move) -> bool:
-		return stance == other.stance and arm_l == other.arm_l and arm_r == other.arm_r and hips == other.hips
-
-	func _to_string() -> String:
-		return "Move(stance=%s, arm_l=%s, arm_r=%s, hips=%s)" % [
-			Stance.keys()[stance],
-			ArmPose.keys()[arm_l],
-			ArmPose.keys()[arm_r],
-			HipsPose.keys()[hips],
-		]

@@ -6,11 +6,11 @@ signal moves_shown
 @onready var character: Character = get_parent()
 @onready var move_timer: Timer = $MoveTimer
 
-var _moves: Array[Character.Move] = []
+var _moves: Array[Move] = []
 var _index := 0
 
 
-func show_round(moves: Array[Character.Move], move_show_time: float) -> void:
+func show_round(moves: Array[Move], move_show_time: float) -> void:
 	move_timer.wait_time = move_show_time
 	_moves = moves
 	_index = 0
