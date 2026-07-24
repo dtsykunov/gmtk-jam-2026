@@ -37,10 +37,10 @@ func _process(_delta: float) -> void:
 		character.head_pose = Character.HeadPose.STRAIGHT
 
 	if Input.is_action_pressed("hips_left") and Input.is_action_pressed("hips_right"):
-		character.hips_pose = Character.HipsPose.STRAIGHT
+		character.hips = Character.HipsPose.STRAIGHT
 	elif Input.is_action_pressed("hips_left"):
-		character.hips_pose = Character.HipsPose.LEFT
+		character.hips = Character.HipsPose.LEFT
 	elif Input.is_action_pressed("hips_right"):
-		character.hips_pose = Character.HipsPose.RIGHT
+		character.hips = Character.HipsPose.RIGHT
 	else:
-		character.hips_pose = Character.HipsPose.STRAIGHT
+		character.hips = Character.HipsPose.STRAIGHT

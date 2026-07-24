@@ -4,15 +4,44 @@ extends Node
 @export var enemy: Character
 
 @onready var countdown: Timer = $Countdown
+@onready var start_timer: Timer = $StartTimer
 
 @onready var countdown_label: Label = %CountdownLabel
 @onready var score_label: Label = %ScoreLabel
 
 var score := 0
 
+var cur_difficulty := 0
+var cur_moves := []
+
+const LEVEL_0 := [10, 5.0, Character.MoveDifficulty.EASY]
+const LEVEL_1 := [10, 5.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
+const LEVEL_2 := [10, 5.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM | Character.MoveDifficulty.HARD]
+const LEVEL_3 := [10, 3.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
+const LEVEL_4 := [10, 3.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM | Character.MoveDifficulty.HARD]
+const LEVEL_5 := [10, 1.0, Character.MoveDifficulty.EASY]
+const LEVEL_6 := [10, 1.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
+const LEVEL_7 := [10, 1.0, Character.MoveDifficulty.MEDIUM | Character.MoveDifficulty.HARD]
+const LEVEL_8 := [10, 1.0, Character.MoveDifficulty.HARD]
+
+const LEVELS := {
+	0: LEVEL_0,
+	1: LEVEL_1,
+	2: LEVEL_2,
+	3: LEVEL_3,
+	4: LEVEL_4,
+	5: LEVEL_5,
+	6: LEVEL_6,
+	7: LEVEL_7,
+	8: LEVEL_8,
+}
+
+const MAX_LEVEL := 8
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy.randomize()
+	start_timer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,5 +54,28 @@ func _on_countdown_timeout() -> void:
 		score += 1
 		score_label.text = str(score)
 
+	if len(cur_moves) == 0:
+		cur_difficulty += 1
+		if cur_difficulty >= MAX_LEVEL:
+			return
+		setup()
+	
+	enemy.apply_move(cur_moves.pop_back())
 	countdown.start()
-	enemy.randomize()
+
+
+func _on_start_timer_timeout() -> void:
+	setup()
+	enemy.apply_move(cur_moves.pop_back())
+	countdown.start()
+
+
+func setup() -> void:
+	var diff_info : Array = LEVELS[cur_difficulty]
+
+	var move_count : int = diff_info[0]
+	var countdown_wait_time : float = diff_info[1]
+	var move_difficulty : Character.MoveDifficulty = diff_info[2]
+
+	countdown.wait_time = countdown_wait_time
+	cur_moves = Character.randomize_moves(move_difficulty, move_count)

@@ -15,9 +15,12 @@ script = ExtResource("2_c6vsw")
 player = NodePath("Player")
 enemy = NodePath("Enemy")
 
+[node name="StartTimer" type="Timer" parent="GameController" unique_id=448852661]
+wait_time = 3.0
+one_shot = true
+
 [node name="Countdown" type="Timer" parent="GameController" unique_id=593977127]
 wait_time = 5.0
-autostart = true
 
 [node name="Player" parent="GameController" unique_id=1442930848 instance=ExtResource("4_n8sjt")]
 position = Vector2(947, 320)
@@ -61,4 +64,13 @@ offset_bottom = 164.0
 theme_override_font_sizes/font_size = 86
 text = "0"
 
+[node name="Label" type="Label" parent="." unique_id=683467092]
+offset_left = 913.0
+offset_top = 637.0
+offset_right = 1025.0
+offset_bottom = 710.0
+theme_override_font_sizes/font_size = 53
+text = "YOU"
+
+[connection signal="timeout" from="GameController/StartTimer" to="GameController" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]

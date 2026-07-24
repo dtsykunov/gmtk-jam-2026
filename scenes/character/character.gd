@@ -124,9 +124,9 @@ var head_pose := HeadPose.STRAIGHT:
 			HeadPose.RIGHT:
 				anim_tree["parameters/head_blend/blend_amount"] = 1.0
 
-var hips_pose := HipsPose.STRAIGHT:
+var hips := HipsPose.STRAIGHT:
 	set(value):
-		hips_pose = value
+		hips = value
 		match value:
 			HipsPose.LEFT:
 				anim_tree["parameters/stand_hips_blend/blend_amount"] = -1.0
@@ -140,13 +140,13 @@ var hips_pose := HipsPose.STRAIGHT:
 
 
 func has_same_stance(other: Character) -> bool:
-	return [arm_l, arm_r, stance, head_pose, hips_pose] == [other.arm_l, other.arm_r, other.stance, other.head_pose, other.hips_pose]
+	return [arm_l, arm_r, stance, head_pose, hips] == [other.arm_l, other.arm_r, other.stance, other.head_pose, other.hips]
 
 func randomize() -> void:
 	arm_l = ArmPose.values().pick_random()
 	arm_r = ArmPose.values().pick_random()
 	stance = Stance.values().pick_random()
-	hips_pose = HipsPose.values().pick_random()
+	hips = HipsPose.values().pick_random()
 	# head_pose = HeadPose.values().pick_random()
 
 static func get_pool(difficulty: int) -> Array:
@@ -171,3 +171,15 @@ static func randomize_moves(difficulty: int, count: int, allow_repeats := false)
 		out.append(move)
 		last = move
 	return out
+
+func apply_move(poses: Array) -> void:
+	# poses = [stance, arm_l, arm_r, hips]
+	assert(len(poses) == 4, "Unexpected move array")
+	stance = poses[0]
+	arm_l = poses[1]
+	arm_r = poses[2]
+	hips = poses[3]
+	# head_pose = poses[4]
+
+func get_move() -> Array:
+	return [stance, arm_l, arm_r, hips]
