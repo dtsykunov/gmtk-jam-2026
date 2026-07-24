@@ -85,10 +85,12 @@ func setup_level() -> void:
 
 	countdown.wait_time = cur_level_info.countdown_wait_time
 
+	var all_moves := Character.randomize_moves(cur_level_info.move_difficulty, cur_level_info.round_count * cur_level_info.round_move_count)
+
 	var next_lvl_rounds : Array[Round] = []
 
 	for i in range(cur_level_info.round_count):
-		var round_moves := Character.randomize_moves(cur_level_info.move_difficulty, cur_level_info.round_move_count)
+		var round_moves := all_moves.slice(i * cur_level_info.round_move_count, (i + 1) * cur_level_info.round_move_count)
 		next_lvl_rounds.append(Round.new(round_moves))
 
 	lvl_rounds = next_lvl_rounds
