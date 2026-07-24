@@ -25,13 +25,13 @@ var lvl_rounds: Array[Round] = []
 var cur_round : Round = null
 
 static var LEVELS: Dictionary[int, LevelInfo] = {
-	0: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY),
-	1: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM),
-	2: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.ALL),
-	3: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM),
-	4: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.ALL),
-	5: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY),
-	6: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY),
+	0: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY, 1.0),
+	1: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM, 1.0),
+	2: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.ALL, 1.0),
+	3: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM, 1.0),
+	4: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.ALL, 1.0),
+	5: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY, 1.0),
+	6: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY, 1.0),
 }
 var MAX_LEVEL : int = LEVELS.keys().max()
 
@@ -77,7 +77,7 @@ func _on_start_timer_timeout() -> void:
 func start_round() -> void:
 	cur_round = lvl_rounds.pop_back()
 	round_started.emit(cur_round)
-	enemy_controller.show_round(cur_round.moves)
+	enemy_controller.show_round(cur_round.moves, cur_level_info.move_show_time)
 
 
 func setup_level() -> void:
@@ -121,12 +121,14 @@ class LevelInfo:
 	var countdown_wait_time: float
 	var round_move_count: int
 	var move_difficulty: Character.MoveDifficulty
+	var move_show_time: float
 
-	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty) -> void:
+	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty, p_move_show_time: float) -> void:
 		round_count = p_round_count
 		countdown_wait_time = p_countdown_wait_time
 		round_move_count = p_round_move_count
 		move_difficulty = p_move_difficulty
+		move_show_time = p_move_show_time
 
 
 func _on_enemy_moves_shown() -> void:

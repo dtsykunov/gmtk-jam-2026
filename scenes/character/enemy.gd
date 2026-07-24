@@ -10,7 +10,8 @@ var _moves: Array[Character.Move] = []
 var _index := 0
 
 
-func show_round(moves: Array[Character.Move]) -> void:
+func show_round(moves: Array[Character.Move], move_show_time: float) -> void:
+	move_timer.wait_time = move_show_time
 	_moves = moves
 	_index = 0
 	_show_next()
