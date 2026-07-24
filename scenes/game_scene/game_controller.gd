@@ -95,6 +95,11 @@ func setup_level() -> void:
 
 
 func _moves_match(recorded: Array[Character.Move], round_moves: Array[Character.Move]) -> bool:
+	if round_moves.size() == 1:
+		if recorded.is_empty():
+			return false
+		return recorded.back().equals(round_moves[0])
+
 	if recorded.size() != round_moves.size():
 		return false
 	for i in recorded.size():
