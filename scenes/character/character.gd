@@ -22,8 +22,68 @@ enum HipsPose {
 	RIGHT,
 }
 
+enum MoveDifficulty {
+	EASY = 1,
+	MEDIUM = 2,
+	HARD = 4,
+	ALL = EASY | MEDIUM | HARD,
+}
+
+# one button pressed at most
+const EASY_MOVES := [
+	# stance, arm_l, arm_r, hips
+	# [Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED], # default
+	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT],
+
+	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT],
+	[Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.STRAIGHT],
+	[Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.LEFT],
+	[Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.RIGHT],
+]
+
+# two buttons pressed
+const MEDIUM_MOVES := [
+	[Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT],
+	[Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.STRAIGHT],
+
+	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.LEFT],
+	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.RIGHT],
+
+	[Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.STRAIGHT],
+
+	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.LEFT],
+	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.RIGHT],
+
+	[Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.LEFT],
+	[Stance.STANDING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.RIGHT],
+]
+
+# three or more buttons pressed
+const HARD_MOVES := [
+	[Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.STRAIGHT],
+
+	[Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.LEFT],
+	[Stance.SITTING, ArmPose.LOWERED, ArmPose.RAISED, HipsPose.RIGHT],
+
+	[Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.LEFT],
+	[Stance.SITTING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.RIGHT],
+
+	[Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.LEFT],
+	[Stance.STANDING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.RIGHT],
+
+	[Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.LEFT],
+	[Stance.SITTING, ArmPose.RAISED, ArmPose.RAISED, HipsPose.RIGHT],
+]
+	
+const MOVES := {
+	MoveDifficulty.EASY: EASY_MOVES,
+	MoveDifficulty.MEDIUM: MEDIUM_MOVES,
+	MoveDifficulty.HARD: HARD_MOVES,
+}
+
 @onready var anim_player: AnimationPlayer = %AnimationPlayer
 @onready var anim_tree: AnimationTree = %AnimationTree
+
 
 var arm_l := ArmPose.LOWERED:
 	set(value):
@@ -88,3 +148,26 @@ func randomize() -> void:
 	stance = Stance.values().pick_random()
 	hips_pose = HipsPose.values().pick_random()
 	# head_pose = HeadPose.values().pick_random()
+
+static func get_pool(difficulty: int) -> Array:
+	var out: Array = []
+	for d: MoveDifficulty in MOVES:
+		if difficulty & d:
+			out.append_array(MOVES[d])
+	return out
+
+
+static func randomize_moves(difficulty: int, count: int, allow_repeats := false) -> Array:
+	var pool := get_pool(difficulty)
+	assert(not pool.is_empty(), "No moves for difficulty %d" % difficulty)
+
+	var out: Array = []
+	var last: Array = []
+	for i in count:
+		var move: Array = pool.pick_random()
+		if not allow_repeats and pool.size() > 1:
+			while move == last:
+				move = pool.pick_random()
+		out.append(move)
+		last = move
+	return out
