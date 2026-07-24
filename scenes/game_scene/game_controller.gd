@@ -39,7 +39,7 @@ var MAX_LEVEL : int = LEVELS.keys().max()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	countdown_started.connect(player_controller.unpause_input)
-	round_finished.connect(player_controller.pause_input)
+	round_finished.connect(player_controller.pause_input.unbind(1))
 	enemy_controller.moves_shown.connect(_on_enemy_moves_shown)
 
 	start_timer.start()
