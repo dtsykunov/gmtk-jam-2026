@@ -31,7 +31,7 @@ func get_inputs() -> Array[String]:
 	var inputs: Array[String] = []
 
 	if stance == Character.Stance.SITTING:
-		inputs.append("hips_down")
+		inputs.append("sit")
 
 	if arm_l == Character.ArmPose.RAISED:
 		inputs.append("right_arm_up")

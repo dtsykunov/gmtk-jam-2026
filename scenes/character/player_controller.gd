@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 	if _paused:
 		return
 
-	if Input.is_action_pressed("hips_down"):
+	if Input.is_action_pressed("sit"):
 		character.stance = Character.Stance.SITTING
 	else:
 		character.stance = Character.Stance.STANDING
