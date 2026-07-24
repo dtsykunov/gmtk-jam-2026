@@ -145,9 +145,6 @@ var hips := HipsPose.STRAIGHT:
 func _ready() -> void:
 	apply_move(DEFAULT_MOVE)
 
-func has_same_stance(other: Character) -> bool:
-	return [arm_l, arm_r, stance, head_pose, hips] == [other.arm_l, other.arm_r, other.stance, other.head_pose, other.hips]
-
 func randomize() -> void:
 	arm_l = ArmPose.values().pick_random()
 	arm_r = ArmPose.values().pick_random()
@@ -200,3 +197,6 @@ class Move:
 		arm_l = p_arm_l
 		arm_r = p_arm_r
 		hips = p_hips
+
+	func equals(other: Move) -> bool:
+		return stance == other.stance and arm_l == other.arm_l and arm_r == other.arm_r and hips == other.hips

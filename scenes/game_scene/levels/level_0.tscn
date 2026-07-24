@@ -6,14 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://dngejn8k75r15" path="res://scenes/game_scene/tutorials/tutorial_0.tscn" id="3_64xdp"]
 [ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="4_n8sjt"]
 [ext_resource type="Script" uid="uid://bsigemijwx6en" path="res://scenes/character/player_controller.gd" id="5_b8k8o"]
+[ext_resource type="Script" uid="uid://1yh65qh4gdld" path="res://scenes/character/enemy.gd" id="6_enemyc"]
 
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
 
-[node name="GameController" type="Node" parent="." unique_id=1296844016 node_paths=PackedStringArray("player", "enemy")]
+[node name="GameController" type="Node" parent="." unique_id=1296844016 node_paths=PackedStringArray("player", "enemy", "player_controller", "enemy_controller")]
 script = ExtResource("2_c6vsw")
 player = NodePath("Player")
 enemy = NodePath("Enemy")
+player_controller = NodePath("Player/PlayerController")
+enemy_controller = NodePath("Enemy/EnemyController")
 
 [node name="StartTimer" type="Timer" parent="GameController" unique_id=448852661]
 wait_time = 3.0
@@ -32,6 +35,12 @@ script = ExtResource("5_b8k8o")
 [node name="Enemy" parent="GameController" unique_id=1412845564 instance=ExtResource("4_n8sjt")]
 position = Vector2(325, 326)
 scale = Vector2(0.70742536, 0.70742536)
+
+[node name="EnemyController" type="Node" parent="GameController/Enemy" unique_id=262844480]
+script = ExtResource("6_enemyc")
+
+[node name="MoveTimer" type="Timer" parent="GameController/Enemy/EnemyController" unique_id=262844479]
+one_shot = true
 
 [node name="TutorialManager" type="Node" parent="." unique_id=1633152630]
 unique_name_in_owner = true
@@ -74,3 +83,4 @@ text = "YOU"
 
 [connection signal="timeout" from="GameController/StartTimer" to="GameController" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]
+[connection signal="timeout" from="GameController/Enemy/EnemyController/MoveTimer" to="GameController/Enemy/EnemyController" method="_on_move_timer_timeout"]
