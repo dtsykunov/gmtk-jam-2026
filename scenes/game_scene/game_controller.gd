@@ -31,7 +31,7 @@ var cur_round : Round = null
 var _player_progress := 0
 
 static var LEVELS: Dictionary[int, LevelInfo] = {
-	0: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY, 1.0),
+	0: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY, .3),
 	1: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM, 1.0),
 	2: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.ALL, 1.0),
 	3: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM, 1.0),
@@ -90,7 +90,11 @@ func start_round() -> void:
 	enemy_move_control.apply_move(null)
 	_player_progress = 0
 	round_started.emit(cur_round)
-	enemy_controller.show_round(cur_round.moves, cur_level_info.move_show_time)
+
+	var clear_enemy := true
+	if len(cur_round.moves) == 1:
+		clear_enemy = false
+	enemy_controller.show_round(cur_round.moves, cur_level_info.move_show_time, clear_enemy)
 
 
 func setup_level() -> void:
@@ -152,7 +156,7 @@ func _on_enemy_moves_shown() -> void:
 
 
 func _on_enemy_move_changed(move: Move) -> void:
-	if cur_round.moves.size() > 1 and enemy_move_control.move != null:
+	if enemy_move_control.move != null:
 		move_history.push_move(enemy_move_control.move)
 	enemy_move_control.apply_move(move)
 
@@ -170,9 +174,5 @@ func _on_player_move_changed(move: Move) -> void:
 	if not move.equals(expected):
 		return
 
-	if _player_progress < cur_round.moves.size() - 1:
-		move_history.pop_oldest()
-	else:
-		enemy_move_control.apply_move(null)
-
+	move_history.pop_oldest()
 	_player_progress += 1

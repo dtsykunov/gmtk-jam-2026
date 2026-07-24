@@ -9,12 +9,14 @@ signal move_changed(move: Move)
 
 var _moves: Array[Move] = []
 var _index := 0
+var _clear := false
 
 
-func show_round(moves: Array[Move], move_show_time: float) -> void:
+func show_round(moves: Array[Move], move_show_time: float, clear := false) -> void:
 	move_timer.wait_time = move_show_time
 	_moves = moves
 	_index = 0
+	_clear = clear
 	_show_next()
 
 
@@ -27,6 +29,9 @@ func _show_next() -> void:
 
 func _on_move_timer_timeout() -> void:
 	if _index == _moves.size():
+		if _clear:
+			character.apply_move(Character.DEFAULT_MOVE)
+			move_changed.emit(Character.DEFAULT_MOVE)
 		moves_shown.emit()
 	else:
 		_show_next()
