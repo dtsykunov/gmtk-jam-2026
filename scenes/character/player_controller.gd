@@ -64,6 +64,7 @@ func _process(delta: float) -> void:
 func pause_input() -> void:
 	_paused = true
 	_finalize_current_move()
+	character.apply_move(Character.DEFAULT_MOVE)
 
 
 func unpause_input() -> void:
