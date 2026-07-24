@@ -1,5 +1,7 @@
 class_name Character extends Node2D
 
+signal move_changed(new_move: Array)
+
 enum Stance {
 	SITTING,
 	STANDING,
@@ -29,10 +31,12 @@ enum MoveDifficulty {
 	ALL = EASY | MEDIUM | HARD,
 }
 
+const DEFAULT_MOVE := [Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT]
+
 # one button pressed at most
 const EASY_MOVES := [
 	# stance, arm_l, arm_r, hips
-	# [Stance.STANDING, ArmPose.LOWERED, ArmPose.LOWERED], # default
+	# DEFAULT_MOVE,
 	[Stance.SITTING, ArmPose.LOWERED, ArmPose.LOWERED, HipsPose.STRAIGHT],
 
 	[Stance.STANDING, ArmPose.RAISED, ArmPose.LOWERED, HipsPose.STRAIGHT],
@@ -138,6 +142,8 @@ var hips := HipsPose.STRAIGHT:
 				anim_tree["parameters/stand_hips_blend/blend_amount"] = 1.0
 				anim_tree["parameters/sit_hips_blend/blend_amount"] = 1.0
 
+func _ready() -> void:
+	apply_move(DEFAULT_MOVE)
 
 func has_same_stance(other: Character) -> bool:
 	return [arm_l, arm_r, stance, head_pose, hips] == [other.arm_l, other.arm_r, other.stance, other.head_pose, other.hips]

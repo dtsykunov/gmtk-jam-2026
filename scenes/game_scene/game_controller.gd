@@ -16,13 +16,11 @@ var cur_moves := []
 
 const LEVEL_0 := [10, 5.0, Character.MoveDifficulty.EASY]
 const LEVEL_1 := [10, 5.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
-const LEVEL_2 := [10, 5.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM | Character.MoveDifficulty.HARD]
+const LEVEL_2 := [10, 5.0, Character.MoveDifficulty.ALL]
 const LEVEL_3 := [10, 3.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
-const LEVEL_4 := [10, 3.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM | Character.MoveDifficulty.HARD]
+const LEVEL_4 := [10, 3.0, Character.MoveDifficulty.ALL]
 const LEVEL_5 := [10, 1.0, Character.MoveDifficulty.EASY]
 const LEVEL_6 := [10, 1.0, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
-const LEVEL_7 := [10, 1.0, Character.MoveDifficulty.MEDIUM | Character.MoveDifficulty.HARD]
-const LEVEL_8 := [10, 1.0, Character.MoveDifficulty.HARD]
 
 const LEVELS := {
 	0: LEVEL_0,
@@ -32,11 +30,8 @@ const LEVELS := {
 	4: LEVEL_4,
 	5: LEVEL_5,
 	6: LEVEL_6,
-	7: LEVEL_7,
-	8: LEVEL_8,
 }
-
-const MAX_LEVEL := 8
+var MAX_LEVEL : int = LEVELS.keys().max()
 
 
 # Called when the node enters the scene tree for the first time.
