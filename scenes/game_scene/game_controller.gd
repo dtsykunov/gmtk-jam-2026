@@ -1,7 +1,7 @@
 extends Node
 
-signal lvl_started # (lvl_info: LevelInfo)
-signal lvl_finished # (lvl_info: LevelInfo)
+signal lvl_started(lvl_info: LevelInfo)
+signal lvl_finished(lvl_info: LevelInfo)
 signal round_started(round: Round)
 signal round_finished(round: Round)
 signal countdown_started
@@ -20,27 +20,18 @@ signal countdown_started
 var score := 0
 
 var cur_difficulty := 0
+var cur_level_info : LevelInfo = null
 var lvl_rounds: Array[Round] = []
 var cur_round : Round = null
 
-const LEVEL_0 := [10, 5.0, 1, Character.MoveDifficulty.EASY] # -> LevelInfo
-
-# const LEVEL_0 := [10, 5.0, 1, Character.MoveDifficulty.EASY]
-# const LEVEL_1 := [10, 5.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
-# const LEVEL_2 := [10, 5.0, 1, Character.MoveDifficulty.ALL]
-# const LEVEL_3 := [10, 3.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM]
-# const LEVEL_4 := [10, 3.0, 1, Character.MoveDifficulty.ALL]
-# const LEVEL_5 := [10, 1.0, 1, Character.MoveDifficulty.EASY]
-# const LEVEL_6 := [10, 1.0, 1, Character.MoveDifficulty.EASY]
-
-const LEVELS := {
-	0: LEVEL_0,
-	# 1: LEVEL_1,
-	# 2: LEVEL_2,
-	# 3: LEVEL_3,
-	# 4: LEVEL_4,
-	# 5: LEVEL_5,
-	# 6: LEVEL_6,
+static var LEVELS: Dictionary[int, LevelInfo] = {
+	0: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY),
+	1: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM),
+	2: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.ALL),
+	3: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM),
+	4: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.ALL),
+	5: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY),
+	6: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY),
 }
 var MAX_LEVEL : int = LEVELS.keys().max()
 
@@ -69,17 +60,17 @@ func _on_countdown_timeout() -> void:
 	if len(lvl_rounds) == 0:
 		cur_difficulty += 1
 		if cur_difficulty > MAX_LEVEL:
-			lvl_finished.emit()
+			lvl_finished.emit(cur_level_info)
 			return
 		setup_level()
-		lvl_started.emit()
+		lvl_started.emit(cur_level_info)
 
 	start_round()
 
 
 func _on_start_timer_timeout() -> void:
 	setup_level()
-	lvl_started.emit()
+	lvl_started.emit(cur_level_info)
 	start_round()
 
 
@@ -90,19 +81,14 @@ func start_round() -> void:
 
 
 func setup_level() -> void:
-	var lvl_info : Array = LEVELS[cur_difficulty]
+	cur_level_info = LEVELS[cur_difficulty]
 
-	var lvl_round_count : int = lvl_info[0]
-	var countdown_wait_time : float = lvl_info[1]
-	var round_move_count : int = lvl_info[2]
-	var move_difficulty : Character.MoveDifficulty = lvl_info[3]
-
-	countdown.wait_time = countdown_wait_time
+	countdown.wait_time = cur_level_info.countdown_wait_time
 
 	var next_lvl_rounds : Array[Round] = []
 
-	for i in range(lvl_round_count):
-		var round_moves := Character.randomize_moves(move_difficulty, round_move_count)
+	for i in range(cur_level_info.round_count):
+		var round_moves := Character.randomize_moves(cur_level_info.move_difficulty, cur_level_info.round_move_count)
 		next_lvl_rounds.append(Round.new(round_moves))
 
 	lvl_rounds = next_lvl_rounds
@@ -123,6 +109,19 @@ class Round:
 	func _init(p_moves: Array[Character.Move]) -> void:
 		assert(len(p_moves) > 0)
 		moves = p_moves
+
+
+class LevelInfo:
+	var round_count: int
+	var countdown_wait_time: float
+	var round_move_count: int
+	var move_difficulty: Character.MoveDifficulty
+
+	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty) -> void:
+		round_count = p_round_count
+		countdown_wait_time = p_countdown_wait_time
+		round_move_count = p_round_move_count
+		move_difficulty = p_move_difficulty
 
 
 func _on_enemy_moves_shown() -> void:
