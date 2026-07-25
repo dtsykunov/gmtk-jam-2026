@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bll85ag2um7hl" path="res://scenes/game_scene/tutorial_manager.gd" id="2_64xdp"]
 [ext_resource type="Script" uid="uid://bpjmigsy5bs5e" path="res://scenes/game_scene/game_controller.gd" id="2_c6vsw"]
 [ext_resource type="PackedScene" uid="uid://bywkrawu7kg04" path="res://scenes/character/good_guy/good_guy.tscn" id="3_03owc"]
-[ext_resource type="PackedScene" uid="uid://dngejn8k75r15" path="res://scenes/game_scene/tutorials/tutorial_0.tscn" id="3_64xdp"]
 [ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="4_n8sjt"]
 [ext_resource type="Script" uid="uid://bsigemijwx6en" path="res://scenes/character/player_controller.gd" id="5_b8k8o"]
 [ext_resource type="Script" uid="uid://1yh65qh4gdld" path="res://scenes/character/enemy.gd" id="6_enemyc"]
@@ -22,6 +21,7 @@ player_controller = NodePath("Player/PlayerController")
 enemy_controller = NodePath("Enemy/EnemyController")
 
 [node name="StartTimer" type="Timer" parent="GameController" unique_id=448852661]
+wait_time = 3.0
 one_shot = true
 
 [node name="Countdown" type="Timer" parent="GameController" unique_id=593977127]
@@ -51,7 +51,6 @@ one_shot = true
 [node name="TutorialManager" type="Node" parent="." unique_id=1633152630]
 unique_name_in_owner = true
 script = ExtResource("2_64xdp")
-tutorial_scenes = Array[PackedScene]([ExtResource("3_64xdp")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=445704680]
 layer = 2
