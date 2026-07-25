@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bg1aiuexvwtc1"]
+
+[ext_resource type="Script" uid="uid://d2nqdim4b88el" path="res://scenes/dev_tools/move_recorder/move_recorder.gd" id="1_mvrec"]
+[ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="2_char"]
+
+[node name="MoveRecorder" type="Node2D" unique_id=2035142021]
+script = ExtResource("1_mvrec")
+
+[node name="Character" parent="." unique_id=771676521 instance=ExtResource("2_char")]
+position = Vector2(400, 360)
+scale = Vector2(0.7, 0.7)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1533293437]
+
+[node name="Instructions" type="Label" parent="CanvasLayer" unique_id=1507956496]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 20
+text = "Recording..."

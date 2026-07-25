@@ -65,3 +65,6 @@ tmpfile
 
 **/*.tmp
 **/*.TMP
+
+
+scenes/dev_tools/move_recorder/recordings
