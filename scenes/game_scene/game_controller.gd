@@ -30,6 +30,7 @@ var cur_level_info : LevelInfo = null
 var lvl_rounds: Array[Round] = []
 var cur_round : Round = null
 var _remaining_moves: Array[Move] = []
+var _last_enemy_move: Move = null
 
 static var LEVELS: Dictionary[int, LevelInfo] = {
 	0: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY, .3),
@@ -105,10 +106,14 @@ func start_round() -> void:
 	cur_round = lvl_rounds.pop_front()
 	_remaining_moves = []
 	move_history.set_moves(_remaining_moves)
+	_last_enemy_move = null
 	enemy_move_control.apply_move(null)
 	round_started.emit(cur_round)
 
-	enemy_controller.show_round(cur_round.moves, cur_round.move_show_times, true)
+	var clear_enemy := true
+	if len(cur_round.moves) == 1:
+		clear_enemy = false
+	enemy_controller.show_round(cur_round.moves, cur_round.move_show_times, clear_enemy)
 
 
 func setup_level() -> void:
@@ -225,9 +230,10 @@ func _on_enemy_moves_shown() -> void:
 
 
 func _on_enemy_move_changed(move: Move) -> void:
-	if enemy_move_control.move != null:
-		_remaining_moves.append(enemy_move_control.move)
+	if _last_enemy_move != null:
+		_remaining_moves.append(_last_enemy_move)
 		move_history.set_moves(_remaining_moves)
+	_last_enemy_move = move
 	enemy_move_control.apply_move(move)
 
 
