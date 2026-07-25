@@ -155,6 +155,34 @@ class Round:
 			moves.append(timed_move.move)
 			move_show_times.append(timed_move.show_time)
 
+	static func load_from_file(path: String) -> Round:
+		var file := FileAccess.open(path, FileAccess.READ)
+		assert(file != null, "Could not open recording file: %s" % path)
+
+		var timed_moves : Array[TimedMove] = []
+		while not file.eof_reached():
+			var line := file.get_line().strip_edges()
+			if line.is_empty():
+				continue
+
+			var parts := line.split(",")
+			assert(parts.size() == 5, "Malformed recording line in %s: %s" % [path, line])
+			assert(Character.Stance.has(parts[0]), "Unknown stance in %s: %s" % [path, parts[0]])
+			assert(Character.ArmPose.has(parts[1]), "Unknown arm_l pose in %s: %s" % [path, parts[1]])
+			assert(Character.ArmPose.has(parts[2]), "Unknown arm_r pose in %s: %s" % [path, parts[2]])
+			assert(Character.HipsPose.has(parts[3]), "Unknown hips pose in %s: %s" % [path, parts[3]])
+
+			var move := Move.new(
+				Character.Stance[parts[0]],
+				Character.ArmPose[parts[1]],
+				Character.ArmPose[parts[2]],
+				Character.HipsPose[parts[3]],
+			)
+			timed_moves.append(TimedMove.new(move, parts[4].to_float()))
+		file.close()
+
+		return Round.new(timed_moves)
+
 
 class LevelInfo:
 	var round_count: int
@@ -174,6 +202,12 @@ class LevelInfo:
 
 	static func custom(p_countdown_wait_time: float, p_rounds: Array[Round]) -> LevelInfo:
 		return LevelInfo.new(0, p_countdown_wait_time, 0, Character.MoveDifficulty.EASY, 0.0, p_rounds)
+
+	static func from_recordings(p_countdown_wait_time: float, p_recording_paths: Array[String]) -> LevelInfo:
+		var loaded_rounds : Array[Round] = []
+		for path in p_recording_paths:
+			loaded_rounds.append(Round.load_from_file(path))
+		return LevelInfo.custom(p_countdown_wait_time, loaded_rounds)
 
 
 func _on_enemy_moves_shown() -> void:

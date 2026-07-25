@@ -1,7 +1,10 @@
 extends Node2D
 ## Development-only tool: hold poses on the keyboard to record a round,
 ## then press Enter to print a Round.new([...]) literal ready to paste
-## into GameController.LEVELS. Escape discards the round in progress.
+## into GameController.LEVELS, and to save the round to its own file
+## (one line per move: stance,arm_l,arm_r,hips,show_time) that
+## GameController.LevelInfo.from_recordings() can load directly.
+## Escape discards the round in progress.
 
 const MIN_HOLD_DURATION := 0.15
 const RECORDINGS_DIR := "res://scenes/dev_tools/move_recorder/recordings"
@@ -20,7 +23,7 @@ func _ready() -> void:
 	character.apply_move(Character.DEFAULT_MOVE)
 	_session_id = Time.get_datetime_string_from_system(true).replace(":", "-")
 	DirAccess.make_dir_recursive_absolute(RECORDINGS_DIR)
-	instructions_label.text = "Hold a pose to record a move (min %.2fs).\nEnter: finish round and print it\nEscape: discard round in progress\n\nEach round is saved as its own file in:\n%s" % [MIN_HOLD_DURATION, ProjectSettings.globalize_path(RECORDINGS_DIR)]
+	instructions_label.text = "Hold a pose to record a move (min %.2fs).\nEnter: finish round, print it, and save it to its own file\nEscape: discard round in progress\n\nEach round is saved as its own file (loadable via\nLevelInfo.from_recordings) in:\n%s" % [MIN_HOLD_DURATION, ProjectSettings.globalize_path(RECORDINGS_DIR)]
 
 
 func _process(delta: float) -> void:
@@ -83,17 +86,19 @@ func _finish_round() -> void:
 		print("No moves recorded, nothing to print.")
 		return
 
-	var lines : Array[String] = []
+	var literal_lines : Array[String] = []
+	var csv_lines : Array[String] = []
 	for entry in _round_moves:
 		var m : Move = entry["move"]
 		var d : float = entry["duration"]
-		lines.append("\t\tTimedMove.new(%s, %.2f)," % [_move_literal(m), d])
+		literal_lines.append("\t\tTimedMove.new(%s, %.2f)," % [_move_literal(m), d])
+		csv_lines.append(_move_csv_line(m, d))
 
-	var round_text := "\tRound.new([\n" + "\n".join(lines) + "\n\t]),"
+	var round_text := "\tRound.new([\n" + "\n".join(literal_lines) + "\n\t]),"
 	print(round_text)
 
 	_round_index += 1
-	_write_round_file(round_text)
+	_write_round_file("\n".join(csv_lines) + "\n")
 
 	_round_moves.clear()
 	_current_move = null
@@ -109,12 +114,22 @@ func _move_literal(m: Move) -> String:
 	]
 
 
-func _write_round_file(round_text: String) -> void:
+func _move_csv_line(m: Move, duration: float) -> String:
+	return "%s,%s,%s,%s,%.2f" % [
+		Character.Stance.keys()[m.stance],
+		Character.ArmPose.keys()[m.arm_l],
+		Character.ArmPose.keys()[m.arm_r],
+		Character.HipsPose.keys()[m.hips],
+		duration,
+	]
+
+
+func _write_round_file(content: String) -> void:
 	var path := "%s/round_%s_%02d.txt" % [RECORDINGS_DIR, _session_id, _round_index]
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
 		push_error("Failed to open %s for writing (error %d)" % [path, FileAccess.get_open_error()])
 		return
-	file.store_string(round_text)
+	file.store_string(content)
 	file.close()
 	print("Saved to: ", ProjectSettings.globalize_path(path))
