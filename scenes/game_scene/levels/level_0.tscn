@@ -21,7 +21,6 @@ player_controller = NodePath("Player/PlayerController")
 enemy_controller = NodePath("Enemy/EnemyController")
 
 [node name="StartTimer" type="Timer" parent="GameController" unique_id=448852661]
-wait_time = 3.0
 one_shot = true
 
 [node name="Countdown" type="Timer" parent="GameController" unique_id=593977127]
