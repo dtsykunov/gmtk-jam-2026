@@ -28,7 +28,7 @@ var cur_difficulty := 0
 var cur_level_info : LevelInfo = null
 var lvl_rounds: Array[Round] = []
 var cur_round : Round = null
-var _player_progress := 0
+var _remaining_moves: Array[Move] = []
 
 static var LEVELS: Dictionary[int, LevelInfo] = {
 	0: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY, .3),
@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 func _on_countdown_timeout() -> void:
 	round_finished.emit(cur_round)
 
-	if _moves_match(player_controller.get_recorded_moves(), cur_round.moves):
+	if _moves_match():
 		score += 1
 		score_label.text = str(score)
 
@@ -86,9 +86,9 @@ func _on_start_timer_timeout() -> void:
 
 func start_round() -> void:
 	cur_round = lvl_rounds.pop_front()
-	move_history.clear()
+	_remaining_moves = []
+	move_history.set_moves(_remaining_moves)
 	enemy_move_control.apply_move(null)
-	_player_progress = 0
 	round_started.emit(cur_round)
 
 	var clear_enemy := true
@@ -120,18 +120,14 @@ func setup_level() -> void:
 	lvl_rounds = next_lvl_rounds
 
 
-func _moves_match(recorded: Array[Move], round_moves: Array[Move]) -> bool:
-	if round_moves.size() == 1:
+func _moves_match() -> bool:
+	if cur_round.moves.size() == 1:
+		var recorded := player_controller.get_recorded_moves()
 		if recorded.is_empty():
 			return false
-		return recorded.back().equals(round_moves[0])
+		return recorded.back().equals(cur_round.moves[0])
 
-	if recorded.size() != round_moves.size():
-		return false
-	for i in recorded.size():
-		if not recorded[i].equals(round_moves[i]):
-			return false
-	return true
+	return _remaining_moves.is_empty()
 
 
 class TimedMove:
@@ -217,22 +213,18 @@ func _on_enemy_moves_shown() -> void:
 
 func _on_enemy_move_changed(move: Move) -> void:
 	if enemy_move_control.move != null:
-		move_history.push_move(enemy_move_control.move)
+		_remaining_moves.append(enemy_move_control.move)
+		move_history.set_moves(_remaining_moves)
 	enemy_move_control.apply_move(move)
 
 
 func _on_player_move_changed(move: Move) -> void:
-	if cur_round == null or cur_round.moves.size() <= 1:
+	if _remaining_moves.is_empty():
 		return
-	if _player_progress >= cur_round.moves.size():
-		return
-
 	if move.equals(Character.DEFAULT_MOVE):
 		return
-
-	var expected := cur_round.moves[_player_progress]
-	if not move.equals(expected):
+	if not move.equals(_remaining_moves[0]):
 		return
 
-	move_history.pop_oldest()
-	_player_progress += 1
+	_remaining_moves.pop_front()
+	move_history.set_moves(_remaining_moves)
