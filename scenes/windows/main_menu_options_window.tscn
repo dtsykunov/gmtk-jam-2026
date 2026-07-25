@@ -16,9 +16,9 @@ offset_bottom = 0.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 packed_scene = ExtResource("2_mljqd")
+ignore_siblings = false
 update_content = true
 close_button_text = "Back"
-title_visible = false
 
 [node name="TitleMargin" parent="ContentContainer/BoxContainer" parent_id_path=PackedInt32Array(394030069) index="0" unique_id=1262022916]
 visible = false
