@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://qi4qdfy4cte8" path="res://scenes/game_scene/levels/level.gd" id="1_xcm4a"]
 [ext_resource type="Script" uid="uid://bll85ag2um7hl" path="res://scenes/game_scene/tutorial_manager.gd" id="2_64xdp"]
 [ext_resource type="Script" uid="uid://bpjmigsy5bs5e" path="res://scenes/game_scene/game_controller.gd" id="2_c6vsw"]
+[ext_resource type="PackedScene" uid="uid://bywkrawu7kg04" path="res://scenes/character/good_guy/good_guy.tscn" id="3_03owc"]
 [ext_resource type="PackedScene" uid="uid://dngejn8k75r15" path="res://scenes/game_scene/tutorials/tutorial_0.tscn" id="3_64xdp"]
 [ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="4_n8sjt"]
 [ext_resource type="Script" uid="uid://bsigemijwx6en" path="res://scenes/character/player_controller.gd" id="5_b8k8o"]
@@ -30,7 +31,7 @@ one_shot = true
 [node name="RoundPauseTimer" type="Timer" parent="GameController" unique_id=1004633121]
 one_shot = true
 
-[node name="Player" parent="GameController" unique_id=1442930848 instance=ExtResource("4_n8sjt")]
+[node name="Player" parent="GameController" unique_id=1442930848 instance=ExtResource("3_03owc")]
 position = Vector2(967, 325)
 scale = Vector2(0.55, 0.55)
 
