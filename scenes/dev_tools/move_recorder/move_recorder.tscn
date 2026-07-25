@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d2nqdim4b88el" path="res://scenes/dev_tools/move_recorder/move_recorder.gd" id="1_mvrec"]
 [ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="2_char"]
+[ext_resource type="PackedScene" uid="uid://booopyflpmbje" path="res://scenes/game_scene/move_history/move_history.tscn" id="3_mvhist"]
 
 [node name="MoveRecorder" type="Node2D" unique_id=2035142021]
 script = ExtResource("1_mvrec")
@@ -19,3 +20,11 @@ offset_right = 700.0
 offset_bottom = 160.0
 theme_override_font_sizes/font_size = 20
 text = "Recording..."
+
+[node name="MoveHistory" parent="CanvasLayer" unique_id=852309210 instance=ExtResource("3_mvhist")]
+unique_name_in_owner = true
+offset_left = -67.0
+offset_top = -176.0
+offset_right = 201.0
+offset_bottom = 568.0
+scale = Vector2(0.5, 0.5)

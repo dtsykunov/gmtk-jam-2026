@@ -31,15 +31,65 @@ var lvl_rounds: Array[Round] = []
 var cur_round : Round = null
 var _remaining_moves: Array[Move] = []
 var _last_enemy_move: Move = null
+var _player_turn_active := false
 
 static var LEVELS: Dictionary[int, LevelInfo] = {
-	0: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY, .3),
-	1: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM, 1.0),
-	2: LevelInfo.new(10, 5.0, 1, Character.MoveDifficulty.ALL, 1.0),
-	3: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.EASY | Character.MoveDifficulty.MEDIUM, 1.0),
-	4: LevelInfo.new(10, 3.0, 1, Character.MoveDifficulty.ALL, 1.0),
-	5: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY, 1.0),
-	6: LevelInfo.new(10, 1.0, 1, Character.MoveDifficulty.EASY, 1.0),
+	# "You think you got what it takes?
+	0: LevelInfo.new(10, 0.0, 1, Character.MoveDifficulty.EASY, 1.0, [], false),
+	1: LevelInfo.new(10, 0.0, 1, Character.MoveDifficulty.MEDIUM, 1.0, [], false),
+	2: LevelInfo.new(10, 0.0, 1, Character.MoveDifficulty.HARD, 1.0, [], false),
+
+	# Okay, how about this?
+	3: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.EASY, 1.0),
+	4: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.MEDIUM, 1.0),
+	5: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0),
+
+	6: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/1.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/2.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/3.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/4.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/5.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/6.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/1.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/2.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/3.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/4.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/5.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/6.txt"),
+	]),
+
+	7: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/1.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/2.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/3.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/4.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/5.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/6.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/7.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/8.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/9.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/10.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/11.txt"),
+	]),
+
+	8: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/1.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/2.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/3.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/4.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/5.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/6.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/7.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/8.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/9.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/10.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/11.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/12.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/13.txt"),
+		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/14.txt"),
+	]),
+
 }
 var MAX_LEVEL : int = LEVELS.keys().max()
 
