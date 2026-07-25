@@ -4,7 +4,7 @@ signal lvl_started(lvl_info: LevelInfo)
 signal lvl_finished(lvl_info: LevelInfo)
 signal round_started(round: Round)
 signal round_finished(round: Round)
-signal countdown_started
+signal player_turn_started
 
 @export var player: Character
 @export var enemy: Character
@@ -13,6 +13,7 @@ signal countdown_started
 
 @onready var countdown: Timer = $Countdown
 @onready var start_timer: Timer = $StartTimer
+@onready var round_pause_timer: Timer = $RoundPauseTimer
 
 @onready var countdown_label: Label = %CountdownLabel
 @onready var score_label: Label = %ScoreLabel
@@ -44,8 +45,7 @@ var MAX_LEVEL : int = LEVELS.keys().max()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	countdown_started.connect(player_controller.unpause_input)
-	round_finished.connect(player_controller.pause_input.unbind(1))
+	player_turn_started.connect(player_controller.start_turn)
 	enemy_controller.moves_shown.connect(_on_enemy_moves_shown)
 
 	player_controller.move_changed.connect(player_move_control.apply_move)
@@ -57,15 +57,27 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	countdown_label.text = str(ceili(countdown.time_left))
+	if cur_level_info != null and not cur_level_info.has_countdown:
+		countdown_label.text = "∞"
+	else:
+		countdown_label.text = str(ceili(countdown.time_left))
 
 
 func _on_countdown_timeout() -> void:
+	_finish_round(_remaining_moves.is_empty())
+
+
+func _finish_round(matched: bool) -> void:
+	countdown.stop()
+	_remaining_moves = []
+	move_history.set_moves(_remaining_moves)
 	round_finished.emit(cur_round)
 
-	if _moves_match():
+	if matched:
 		score += 1
 		score_label.text = str(score)
+
+	var pause_time := cur_level_info.pause_time
 
 	if len(lvl_rounds) == 0:
 		cur_difficulty += 1
@@ -75,6 +87,11 @@ func _on_countdown_timeout() -> void:
 		setup_level()
 		lvl_started.emit(cur_level_info)
 
+	round_pause_timer.wait_time = pause_time
+	round_pause_timer.start()
+
+
+func _on_round_pause_timeout() -> void:
 	start_round()
 
 
@@ -91,16 +108,14 @@ func start_round() -> void:
 	enemy_move_control.apply_move(null)
 	round_started.emit(cur_round)
 
-	var clear_enemy := true
-	if len(cur_round.moves) == 1:
-		clear_enemy = false
-	enemy_controller.show_round(cur_round.moves, cur_round.move_show_times, clear_enemy)
+	enemy_controller.show_round(cur_round.moves, cur_round.move_show_times, true)
 
 
 func setup_level() -> void:
 	cur_level_info = LEVELS[cur_difficulty]
 
-	countdown.wait_time = cur_level_info.countdown_wait_time
+	if cur_level_info.has_countdown:
+		countdown.wait_time = cur_level_info.countdown_wait_time
 
 	if not cur_level_info.rounds.is_empty():
 		lvl_rounds = cur_level_info.rounds.duplicate()
@@ -118,16 +133,6 @@ func setup_level() -> void:
 		next_lvl_rounds.append(Round.new(timed_moves))
 
 	lvl_rounds = next_lvl_rounds
-
-
-func _moves_match() -> bool:
-	if cur_round.moves.size() == 1:
-		var recorded := player_controller.get_recorded_moves()
-		if recorded.is_empty():
-			return false
-		return recorded.back().equals(cur_round.moves[0])
-
-	return _remaining_moves.is_empty()
 
 
 class TimedMove:
@@ -187,28 +192,36 @@ class LevelInfo:
 	var move_difficulty: Character.MoveDifficulty
 	var move_show_time: float
 	var rounds: Array[Round]
+	var has_countdown: bool
+	var pause_time: float
 
-	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty, p_move_show_time: float, p_rounds: Array[Round] = []) -> void:
+	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty, p_move_show_time: float, p_rounds: Array[Round] = [], p_has_countdown: bool = true, p_pause_time: float = 1.0) -> void:
 		round_count = p_round_count
 		countdown_wait_time = p_countdown_wait_time
 		round_move_count = p_round_move_count
 		move_difficulty = p_move_difficulty
 		move_show_time = p_move_show_time
 		rounds = p_rounds
+		has_countdown = p_has_countdown
+		pause_time = p_pause_time
 
-	static func custom(p_countdown_wait_time: float, p_rounds: Array[Round]) -> LevelInfo:
-		return LevelInfo.new(0, p_countdown_wait_time, 0, Character.MoveDifficulty.EASY, 0.0, p_rounds)
+	static func custom(p_countdown_wait_time: float, p_rounds: Array[Round], p_pause_time := 1.0) -> LevelInfo:
+		return LevelInfo.new(0, p_countdown_wait_time, 0, Character.MoveDifficulty.EASY, 0.0, p_rounds, true, p_pause_time)
 
-	static func from_recordings(p_countdown_wait_time: float, p_recording_paths: Array[String]) -> LevelInfo:
+	static func untimed(p_rounds: Array[Round], p_pause_time := 1.0) -> LevelInfo:
+		return LevelInfo.new(0, 0.0, 0, Character.MoveDifficulty.EASY, 0.0, p_rounds, false, p_pause_time)
+
+	static func from_recordings(p_countdown_wait_time: float, p_recording_paths: Array[String], p_pause_time := 1.0) -> LevelInfo:
 		var loaded_rounds : Array[Round] = []
 		for path in p_recording_paths:
 			loaded_rounds.append(Round.load_from_file(path))
-		return LevelInfo.custom(p_countdown_wait_time, loaded_rounds)
+		return LevelInfo.custom(p_countdown_wait_time, loaded_rounds, p_pause_time)
 
 
 func _on_enemy_moves_shown() -> void:
-	countdown.start()
-	countdown_started.emit()
+	if cur_level_info.has_countdown:
+		countdown.start()
+	player_turn_started.emit()
 
 
 func _on_enemy_move_changed(move: Move) -> void:
@@ -228,3 +241,6 @@ func _on_player_move_changed(move: Move) -> void:
 
 	_remaining_moves.pop_front()
 	move_history.set_moves(_remaining_moves)
+
+	if _remaining_moves.is_empty():
+		_finish_round(true)

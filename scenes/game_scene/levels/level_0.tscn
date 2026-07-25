@@ -27,6 +27,9 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="RoundPauseTimer" type="Timer" parent="GameController" unique_id=1004633121]
+one_shot = true
+
 [node name="Player" parent="GameController" unique_id=1442930848 instance=ExtResource("4_n8sjt")]
 position = Vector2(967, 325)
 scale = Vector2(0.55, 0.55)
@@ -141,4 +144,5 @@ scale = Vector2(0.5, 0.5)
 
 [connection signal="timeout" from="GameController/StartTimer" to="GameController" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]
+[connection signal="timeout" from="GameController/RoundPauseTimer" to="GameController" method="_on_round_pause_timeout"]
 [connection signal="timeout" from="GameController/Enemy/EnemyController/MoveTimer" to="GameController/Enemy/EnemyController" method="_on_move_timer_timeout"]

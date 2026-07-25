@@ -3,21 +3,14 @@ extends Node
 
 signal move_changed(move: Move)
 
-@export var min_hold_duration := 0.5
-
 @onready var character : Character = get_parent()
 
-var _paused := true
 var _current_move: Move
 var _current_hold_time := 0.0
-var _recorded_moves: Array[Move] = []
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if _paused:
-		return
-
 	if Input.is_action_pressed("sit"):
 		character.stance = Character.Stance.SITTING
 	else:
@@ -55,7 +48,6 @@ func _process(delta: float) -> void:
 
 	var new_move := Move.new(character.stance, character.arm_l, character.arm_r, character.hips)
 	if _current_move == null or not new_move.equals(_current_move):
-		_finalize_current_move()
 		_current_move = new_move
 		_current_hold_time = 0.0
 		move_changed.emit(_current_move)
@@ -63,27 +55,6 @@ func _process(delta: float) -> void:
 		_current_hold_time += delta
 
 
-func pause_input() -> void:
-	_paused = true
-	_finalize_current_move()
-	character.apply_move(Character.DEFAULT_MOVE)
-	move_changed.emit(Character.DEFAULT_MOVE)
-
-
-func unpause_input() -> void:
-	_paused = false
-	_recorded_moves = []
+func start_turn() -> void:
 	_current_move = null
 	_current_hold_time = 0.0
-
-
-func get_recorded_moves() -> Array[Move]:
-	return _recorded_moves
-
-
-func _finalize_current_move() -> void:
-	if _current_move == null or _current_hold_time < min_hold_duration:
-		return
-	if _current_move.equals(Character.DEFAULT_MOVE):
-		return
-	_recorded_moves.append(_current_move)
