@@ -47,6 +47,7 @@ var MAX_LEVEL : int = LEVELS.keys().max()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player_turn_started.connect(player_controller.start_turn)
+	round_started.connect(player_controller.pause_input.unbind(1))
 	enemy_controller.moves_shown.connect(_on_enemy_moves_shown)
 
 	player_controller.move_changed.connect(player_move_control.apply_move)
@@ -70,6 +71,7 @@ func _on_countdown_timeout() -> void:
 
 func _finish_round(matched: bool) -> void:
 	countdown.stop()
+	_player_turn_active = false
 	_remaining_moves = []
 	move_history.set_moves(_remaining_moves)
 	round_finished.emit(cur_round)
@@ -226,6 +228,7 @@ class LevelInfo:
 func _on_enemy_moves_shown() -> void:
 	if cur_level_info.has_countdown:
 		countdown.start()
+	_player_turn_active = true
 	player_turn_started.emit()
 
 
@@ -233,11 +236,14 @@ func _on_enemy_move_changed(move: Move) -> void:
 	if _last_enemy_move != null:
 		move_history.set_moves(_remaining_moves)
 	_last_enemy_move = move
-	_remaining_moves.append(move)
+	if move != Character.DEFAULT_MOVE:
+		_remaining_moves.append(move)
 	enemy_move_control.apply_move(move)
 
 
 func _on_player_move_changed(move: Move) -> void:
+	if not _player_turn_active:
+		return
 	if _remaining_moves.is_empty():
 		return
 	if move.equals(Character.DEFAULT_MOVE):

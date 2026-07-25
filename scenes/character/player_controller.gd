@@ -7,10 +7,14 @@ signal move_changed(move: Move)
 
 var _current_move: Move
 var _current_hold_time := 0.0
+var _paused := true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if _paused:
+		return
+
 	if Input.is_action_pressed("sit"):
 		character.stance = Character.Stance.SITTING
 	else:
@@ -55,6 +59,11 @@ func _process(delta: float) -> void:
 		_current_hold_time += delta
 
 
+func pause_input() -> void:
+	_paused = true
+
+
 func start_turn() -> void:
+	_paused = false
 	_current_move = null
 	_current_hold_time = 0.0
