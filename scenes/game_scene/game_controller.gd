@@ -138,6 +138,7 @@ func _finish_round(matched: bool) -> void:
 		cur_difficulty += 1
 		if cur_difficulty > MAX_LEVEL:
 			lvl_finished.emit(cur_level_info)
+			get_parent().level_won.emit() # TODO
 			return
 		setup_level()
 		lvl_started.emit(cur_level_info)
