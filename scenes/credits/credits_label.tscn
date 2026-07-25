@@ -14,13 +14,29 @@ size_flags_vertical = 5
 bbcode_enabled = true
 text = "[font_size=48]Collaborators[/font_size]
 
-[font_size=32]Godot Game Template[/font_size]
-[img=80]res:///assets/plugin_logo/logo.png[/img]  
-Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
-Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
-License: [url=LICENSE.txt]MIT License[/url]  
+[font_size=32]Art[/font_size]
+Author: [url=https://dariarty21.itch.io/]Daria Vladimirova[/url]  
+
+[font_size=32]Programming[/font_size]
+Author: [url=https://dtsykunov.itch.io/]Dima Tsykunov[/url]
 
 [font_size=48]Sourced[/font_size]
+
+[font_size=24]Kenney Input Prompts[/font_size]
+Author: [url=https://kenney.nl/]Kenney[/url]  
+Source: [url=https://kenney.nl/assets/input-prompts]kenney.nl : input-prompts[/url]  
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+
+[font_size=24]Monoton (font)[/font_size]
+Author: Vernon Adams
+Source: [url=https://fonts.google.com/specimen/Monoton]fonts.google.com : Monoton[/url]  
+License: [url=https://fonts.google.com/specimen/Monoton/license?preview.script=Latn]SIL OPEN FONT LICENSE Version 1.1[/url]
+
+[font_size=24]Work Sans (font)[/font_size]
+Author: Wei Huang
+Source: [url=https://fonts.google.com/specimen/Work+Sans]fonts.google.com : Work Sans[/url]  
+License: [url=https://fonts.google.com/specimen/Work+Sans/license]SIL OPEN FONT LICENSE Version 1.1[/url]
+
 [font_size=24]Godot Engine Logo[/font_size]
 Author: Andrea Calabró  
 Source: [url=https://godotengine.org/press/]godotengine.org : press[/url]  
@@ -29,7 +45,13 @@ License: [url=https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt]
 [font_size=24]Git Logo[/font_size]
 Author: [url=https://bsky.app/profile/jasonlong.me]Jason Long[/url]  
 Source: [url=https://git-scm.com/downloads/logos]git-scm.com : logos[/url]  
-License: [url=https://creativecommons.org/licenses/by/3.0/]CC BY 3.0[/url] 
+License: [url=https://creativecommons.org/licenses/by/3.0/]CC BY 3.0[/url]
+
+[font_size=32]Godot Game Template[/font_size]
+[img=80]res:///assets/plugin_logo/logo.png[/img]  
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
+License: [url=LICENSE.txt]MIT License[/url]  
 
 [font_size=48]Tools[/font_size]
 [font_size=24]Godot[/font_size]
