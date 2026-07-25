@@ -8,13 +8,14 @@ signal move_changed(move: Move)
 @onready var move_timer: Timer = $MoveTimer
 
 var _moves: Array[Move] = []
+var _move_show_times: Array[float] = []
 var _index := 0
 var _clear := false
 
 
-func show_round(moves: Array[Move], move_show_time: float, clear := false) -> void:
-	move_timer.wait_time = move_show_time
+func show_round(moves: Array[Move], move_show_times: Array[float], clear := false) -> void:
 	_moves = moves
+	_move_show_times = move_show_times
 	_index = 0
 	_clear = clear
 	_show_next()
@@ -23,6 +24,7 @@ func show_round(moves: Array[Move], move_show_time: float, clear := false) -> vo
 func _show_next() -> void:
 	character.apply_move(_moves[_index])
 	move_changed.emit(_moves[_index])
+	move_timer.wait_time = _move_show_times[_index]
 	_index += 1
 	move_timer.start()
 

@@ -85,7 +85,7 @@ func _on_start_timer_timeout() -> void:
 
 
 func start_round() -> void:
-	cur_round = lvl_rounds.pop_back()
+	cur_round = lvl_rounds.pop_front()
 	move_history.clear()
 	enemy_move_control.apply_move(null)
 	_player_progress = 0
@@ -94,7 +94,7 @@ func start_round() -> void:
 	var clear_enemy := true
 	if len(cur_round.moves) == 1:
 		clear_enemy = false
-	enemy_controller.show_round(cur_round.moves, cur_level_info.move_show_time, clear_enemy)
+	enemy_controller.show_round(cur_round.moves, cur_round.move_show_times, clear_enemy)
 
 
 func setup_level() -> void:
@@ -102,13 +102,20 @@ func setup_level() -> void:
 
 	countdown.wait_time = cur_level_info.countdown_wait_time
 
+	if not cur_level_info.rounds.is_empty():
+		lvl_rounds = cur_level_info.rounds.duplicate()
+		return
+
 	var all_moves := Character.randomize_moves(cur_level_info.move_difficulty, cur_level_info.round_count * cur_level_info.round_move_count)
 
 	var next_lvl_rounds : Array[Round] = []
 
 	for i in range(cur_level_info.round_count):
 		var round_moves := all_moves.slice(i * cur_level_info.round_move_count, (i + 1) * cur_level_info.round_move_count)
-		next_lvl_rounds.append(Round.new(round_moves))
+		var timed_moves : Array[TimedMove] = []
+		for m in round_moves:
+			timed_moves.append(TimedMove.new(m, cur_level_info.move_show_time))
+		next_lvl_rounds.append(Round.new(timed_moves))
 
 	lvl_rounds = next_lvl_rounds
 
@@ -127,12 +134,26 @@ func _moves_match(recorded: Array[Move], round_moves: Array[Move]) -> bool:
 	return true
 
 
+class TimedMove:
+	var move: Move
+	var show_time: float
+
+	func _init(p_move: Move, p_show_time: float) -> void:
+		move = p_move
+		show_time = p_show_time
+
+
 class Round:
 	var moves: Array[Move]
+	var move_show_times: Array[float]
 
-	func _init(p_moves: Array[Move]) -> void:
-		assert(len(p_moves) > 0)
-		moves = p_moves
+	func _init(p_timed_moves: Array[TimedMove]) -> void:
+		assert(len(p_timed_moves) > 0)
+		moves = []
+		move_show_times = []
+		for timed_move in p_timed_moves:
+			moves.append(timed_move.move)
+			move_show_times.append(timed_move.show_time)
 
 
 class LevelInfo:
@@ -141,13 +162,18 @@ class LevelInfo:
 	var round_move_count: int
 	var move_difficulty: Character.MoveDifficulty
 	var move_show_time: float
+	var rounds: Array[Round]
 
-	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty, p_move_show_time: float) -> void:
+	func _init(p_round_count: int, p_countdown_wait_time: float, p_round_move_count: int, p_move_difficulty: Character.MoveDifficulty, p_move_show_time: float, p_rounds: Array[Round] = []) -> void:
 		round_count = p_round_count
 		countdown_wait_time = p_countdown_wait_time
 		round_move_count = p_round_move_count
 		move_difficulty = p_move_difficulty
 		move_show_time = p_move_show_time
+		rounds = p_rounds
+
+	static func custom(p_countdown_wait_time: float, p_rounds: Array[Round]) -> LevelInfo:
+		return LevelInfo.new(0, p_countdown_wait_time, 0, Character.MoveDifficulty.EASY, 0.0, p_rounds)
 
 
 func _on_enemy_moves_shown() -> void:
