@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://gc4pjjfpwltu"]
+
+[ext_resource type="Script" uid="uid://c00uyxyoel88g" path="res://scenes/bg_music_controller/bg_music_controller.gd" id="1_lq1ww"]
+[ext_resource type="AudioStream" uid="uid://2475v0dohd5p" path="res://assets/music/Rhythmic Vertigo Intensity 1.wav" id="2_xims1"]
+[ext_resource type="AudioStream" uid="uid://lt3fl1lghd6l" path="res://assets/music/Rhythmic Vertigo Intensity 2.wav" id="3_5uyo2"]
+[ext_resource type="AudioStream" uid="uid://bpwpalwued22b" path="res://assets/music/Rhythmic Vertigo Main.wav" id="4_51y20"]
+[ext_resource type="AudioStream" uid="uid://nxiq088jd3r4" path="res://assets/jingles/Retro Start Game.wav" id="5_0p5fm"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_cfnar"]
+clip_count = 4
+clip_0/name = &"int1"
+clip_0/stream = ExtResource("2_xims1")
+clip_0/auto_advance = 0
+clip_1/name = &"int2"
+clip_1/stream = ExtResource("3_5uyo2")
+clip_1/auto_advance = 0
+clip_2/name = &"int3"
+clip_2/stream = ExtResource("4_51y20")
+clip_2/auto_advance = 0
+clip_3/name = &"start"
+clip_3/stream = ExtResource("5_0p5fm")
+clip_3/auto_advance = 1
+clip_3/next_clip = 0
+initial_clip = 3
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 2): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(3, 0): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+}
+}
+
+[node name="BGMusicController" type="Node" unique_id=548846477]
+script = ExtResource("1_lq1ww")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=627860171]
+stream = SubResource("AudioStreamInteractive_cfnar")
+bus = &"Music"

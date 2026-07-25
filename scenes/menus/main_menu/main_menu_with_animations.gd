@@ -18,6 +18,7 @@ func load_game_scene() -> void:
 	super.load_game_scene()
 
 func new_game() -> void:
+	BgMusicController.play_intro()
 	GameState.reset()
 	load_game_scene()
 

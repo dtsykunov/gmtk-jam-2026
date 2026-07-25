@@ -5,6 +5,7 @@ signal lvl_finished(lvl_info: LevelInfo)
 signal round_started(round: Round)
 signal round_finished(round: Round)
 signal player_turn_started
+signal difficulty_changed(difficulty: int)
 
 @export var player: Character
 @export var enemy: Character
@@ -98,6 +99,7 @@ var MAX_LEVEL : int = LEVELS.keys().max()
 func _ready() -> void:
 	player_turn_started.connect(player_controller.start_turn)
 	round_started.connect(player_controller.pause_input.unbind(1))
+	difficulty_changed.connect(BgMusicController.on_difficulty_changed)
 	enemy_controller.moves_shown.connect(_on_enemy_moves_shown)
 
 	player_controller.move_changed.connect(player_move_control.apply_move)
@@ -170,6 +172,7 @@ func start_round() -> void:
 
 func setup_level() -> void:
 	cur_level_info = LEVELS[cur_difficulty]
+	difficulty_changed.emit(cur_difficulty)
 
 	if cur_level_info.has_countdown:
 		countdown.wait_time = cur_level_info.countdown_wait_time
