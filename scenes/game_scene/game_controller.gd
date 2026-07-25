@@ -231,9 +231,9 @@ func _on_enemy_moves_shown() -> void:
 
 func _on_enemy_move_changed(move: Move) -> void:
 	if _last_enemy_move != null:
-		_remaining_moves.append(_last_enemy_move)
 		move_history.set_moves(_remaining_moves)
 	_last_enemy_move = move
+	_remaining_moves.append(move)
 	enemy_move_control.apply_move(move)
 
 
