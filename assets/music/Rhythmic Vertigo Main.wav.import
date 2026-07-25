@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bpwpalwued22b"
+path="res://.godot/imported/Rhythmic Vertigo Main.wav-79eac2caf2d6c8f60854e6e8a9a0745d.sample"
+
+[deps]
+
+source_file="res://assets/music/Rhythmic Vertigo Main.wav"
+dest_files=["res://.godot/imported/Rhythmic Vertigo Main.wav-79eac2caf2d6c8f60854e6e8a9a0745d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
