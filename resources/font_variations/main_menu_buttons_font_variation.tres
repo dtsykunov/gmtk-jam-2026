@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" format=3 uid="uid://bx834jhoq8hr6"]
+
+[ext_resource type="FontFile" uid="uid://cm4lch2ak17pa" path="res://assets/fonts/WorkSans-VariableFont_wght.ttf" id="1_igqrx"]
+
+[resource]
+base_font = ExtResource("1_igqrx")
+variation_opentype = {
+2003265652: 900
+}

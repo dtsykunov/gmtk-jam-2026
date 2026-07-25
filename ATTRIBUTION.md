@@ -16,7 +16,22 @@ License: [CC BY 4.0 International](https://github.com/godotengine/godot/blob/mas
 #### Git Logo
 Author: [Jason Long](https://bsky.app/profile/jasonlong.me)  
 Source: [git-scm.com : logos](https://git-scm.com/downloads/logos)  
-License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) 
+License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
+
+#### Kenney Input Prompts
+Author: [Kenney](https://kenney.nl/)  
+Source: [kenney.nl : input-prompts](https://kenney.nl/assets/input-prompts)  
+License: [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+
+#### Monoton (font)
+Author: Vernon Adams
+Source: [fonts.google.com : Monoton](https://fonts.google.com/specimen/Monoton)  
+License: [SIL OPEN FONT LICENSE Version 1.1](https://fonts.google.com/specimen/Monoton/license?preview.script=Latn)
+
+#### Work Sans (font)
+Author: Wei Huang
+Source: [fonts.google.com : Work Sans](https://fonts.google.com/specimen/Work+Sans)  
+License: [SIL OPEN FONT LICENSE Version 1.1](https://fonts.google.com/specimen/Work+Sans/license)
 
 ## Tools
 #### Godot

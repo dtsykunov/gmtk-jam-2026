@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://i2402jmygcus"]
+
+[ext_resource type="Texture2D" uid="uid://c42xn7624wjv" path="res://icon.svg" id="1_q1jtd"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q1jtd"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_22sfq"]
+animation = &"animation2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_72rnb"]
+animation = &"animation1"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tv41x"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_22sfq"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q1jtd"]
+graph_offset = Vector2(-0.13519287, 76.2641)
+nodes/output/position = Vector2(1020, 200)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_72rnb")
+nodes/Animation/position = Vector2(160, 80)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_q1jtd")
+"nodes/Animation 2/position" = Vector2(140, 320)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_22sfq")
+nodes/Blend2/position = Vector2(420, 100)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_22sfq")
+"nodes/Animation 3/position" = Vector2(500, 520)
+"nodes/Blend2 2/node" = SubResource("AnimationNodeBlend2_tv41x")
+"nodes/Blend2 2/position" = Vector2(720, 320)
+node_connections = [&"output", 0, &"Blend2 2", &"Blend2", 0, &"Animation", &"Blend2", 1, &"Animation 2", &"Blend2 2", 0, &"Blend2", &"Blend2 2", 1, &"Animation 3"]
+
+[sub_resource type="Animation" id="Animation_72rnb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(341, 377)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_22sfq"]
+resource_name = "animation1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(341, 377), Vector2(1018, 150)]
+}
+
+[sub_resource type="Animation" id="Animation_tv41x"]
+resource_name = "animation2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1119, 152), Vector2(804, 536)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.469641]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5inqo"]
+_data = {
+&"RESET": SubResource("Animation_72rnb"),
+&"animation1": SubResource("Animation_22sfq"),
+&"animation2": SubResource("Animation_tv41x")
+}
+
+[node name="Node2D" type="Node2D" unique_id=676986943]
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1665456693]
+tree_root = SubResource("AnimationNodeBlendTree_q1jtd")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 1.0
+"parameters/Blend2 2/blend_amount" = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=309889639]
+libraries/ = SubResource("AnimationLibrary_5inqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2002144128]
+position = Vector2(341, 377)
+texture = ExtResource("1_q1jtd")
