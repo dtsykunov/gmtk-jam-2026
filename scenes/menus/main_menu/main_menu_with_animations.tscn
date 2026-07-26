@@ -8,10 +8,12 @@
 [ext_resource type="FontFile" uid="uid://bkb604g33lumw" path="res://assets/fonts/Monoton-Regular.ttf" id="5_ixa71"]
 [ext_resource type="Texture2D" uid="uid://bwq8kchpkidxp" path="res://assets/backgrounds/showdown_main_backgroung.png" id="5_vsp5b"]
 [ext_resource type="Theme" uid="uid://crjprebjsgvip" path="res://resources/themes/main_menu_custom.tres" id="6_2k5l7"]
+[ext_resource type="Texture2D" uid="uid://dtwhp7tckouix" path="res://assets/drawings/gg/gg-funky.png" id="9_dhrx6"]
+[ext_resource type="Texture2D" uid="uid://uek7nwis10lk" path="res://assets/drawings/big-bad-guy.png" id="10_xkrf4"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "Intro"
-length = 2.4
+length = 4.1
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,7 +21,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(2.4),
+"times": PackedFloat32Array(4.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -57,7 +59,7 @@ tracks/3/path = NodePath("MenuContainer/MenuButtonsMargin/MenuButtonsContainer:m
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.6, 2.4),
+"times": PackedFloat32Array(0, 3.2, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -69,7 +71,7 @@ tracks/4/path = NodePath("MouseFilter:mouse_filter")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.4),
+"times": PackedFloat32Array(0, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 2]
@@ -81,10 +83,34 @@ tracks/5/path = NodePath("VersionMargin/VersionContainer:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.6, 2.4),
+"times": PackedFloat32Array(0, 3.2, 4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BigBadGuy:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.2333335, 2.3666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GgFunky:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.1333334, 3.1333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="6"]
@@ -173,6 +199,30 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BigBadGuy:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GgFunky:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="4"]
@@ -276,6 +326,30 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BigBadGuy:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GgFunky:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2kqig"]
@@ -464,6 +538,20 @@ metadata/_edit_lock_ = true
 
 [node name="ExitConfirmation" parent="." index="10" unique_id=912502155]
 ignore_siblings = false
+
+[node name="BigBadGuy" type="Sprite2D" parent="." index="11" unique_id=205685063]
+modulate = Color(0.8776157, 0.8776158, 0.8776157, 1)
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(765, 723.99994)
+scale = Vector2(0.76944053, 0.7694405)
+texture = ExtResource("10_xkrf4")
+
+[node name="GgFunky" type="Sprite2D" parent="." index="12" unique_id=627825999]
+modulate = Color(0.83889705, 0.838897, 0.8388971, 1)
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(1026, 431)
+scale = Vector2(0.34598354, 0.34598348)
+texture = ExtResource("9_dhrx6")
 
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
