@@ -44,6 +44,11 @@ Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Tem
 Source: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)  
 License: [MIT License](LICENSE.txt)  
 
+#### Retro neon perspective grid floor background (Designed by Magnific)
+Author: [starline](https://www.magnific.com/author/starline)  
+Source: [magnific.com](https://www.magnific.com/free-vector/retro-neon-perspective-grid-floor-background_14649483.htm)  
+License: [Free](https://www.magnific.com/ai/docs/licenses-attribution#merchandise-license)
+
 ## Tools
 #### Godot
 Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)  

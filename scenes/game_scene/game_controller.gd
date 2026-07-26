@@ -98,7 +98,7 @@ var MAX_LEVEL : int = LEVELS.keys().max()
 
 static var LEVELS_DIALOG: Dictionary[int, Array] = {
 	0: [
-		["Hey, buddy", 0.75, 1.0],
+		["Hey, buddy!", 0.75, 1.0],
 		["Do you really think you have what it takes to outdance me?", 3.0, 2.0],
 		["Are you even flexible enough?", 2.0, 1.5],
 		["Show me how you shake those hips!", 2.0, 2.0],

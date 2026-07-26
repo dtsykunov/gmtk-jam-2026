@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://blnir31oq22by"]
 
 [ext_resource type="Script" uid="uid://qi4qdfy4cte8" path="res://scenes/game_scene/levels/level.gd" id="1_xcm4a"]
+[ext_resource type="Texture2D" uid="uid://udhjp5ulpwhv" path="res://assets/backgrounds/фон игры.jpg" id="2_1ojhc"]
 [ext_resource type="Script" uid="uid://bll85ag2um7hl" path="res://scenes/game_scene/tutorial_manager.gd" id="2_64xdp"]
 [ext_resource type="Script" uid="uid://bpjmigsy5bs5e" path="res://scenes/game_scene/game_controller.gd" id="2_c6vsw"]
 [ext_resource type="PackedScene" uid="uid://bywkrawu7kg04" path="res://scenes/character/good_guy/good_guy.tscn" id="3_03owc"]
@@ -13,6 +14,12 @@
 
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
+
+[node name="ФонИгры" type="Sprite2D" parent="." unique_id=935028732]
+z_index = -1
+position = Vector2(647, 310)
+scale = Vector2(0.20997, 0.35588136)
+texture = ExtResource("2_1ojhc")
 
 [node name="GameController" type="Node" parent="." unique_id=1296844016 node_paths=PackedStringArray("player", "enemy", "player_controller", "enemy_controller")]
 script = ExtResource("2_c6vsw")
@@ -66,6 +73,7 @@ grow_vertical = 2
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/Control" unique_id=737246843]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -87,20 +95,20 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -24.0
-offset_top = 21.0
-offset_right = 25.0
-offset_bottom = 139.0
+offset_left = -19.0
+offset_top = 578.0
+offset_right = 34.0
+offset_bottom = 696.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 86
 text = "0"
 
 [node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=683467092]
 layout_mode = 0
-offset_left = 918.0
-offset_top = 65.0
-offset_right = 1030.0
-offset_bottom = 138.0
+offset_left = 921.0
+offset_top = 70.0
+offset_right = 1033.0
+offset_bottom = 143.0
 theme_override_font_sizes/font_size = 53
 text = "YOU"
 
@@ -137,11 +145,11 @@ grow_vertical = 0
 [node name="MoveHistory" parent="CanvasLayer/Control" unique_id=852309209 instance=ExtResource("9_vyne5")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = -67.0
-offset_top = -176.0
-offset_right = 201.0
-offset_bottom = 568.0
-scale = Vector2(0.5, 0.5)
+offset_left = -80.99994
+offset_top = -285.0
+offset_right = 187.00006
+offset_bottom = 459.0
+scale = Vector2(0.625, 0.625)
 
 [node name="Dialog" parent="CanvasLayer/Control" unique_id=1023414024 instance=ExtResource("10_03owc")]
 unique_name_in_owner = true

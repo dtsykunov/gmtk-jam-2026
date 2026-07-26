@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://booopyflpmbje"]
 
 [ext_resource type="Script" uid="uid://cbn00mn7idypu" path="res://scenes/game_scene/move_history/move_history.gd" id="1_yc0tu"]
+[ext_resource type="PackedScene" uid="uid://cukerjdra6irn" path="res://scenes/game_scene/move_control/move_control.tscn" id="2_yc0tu"]
 
 [node name="MoveHistory" type="VBoxContainer" unique_id=852309209]
 anchors_preset = 8
@@ -18,3 +19,30 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 script = ExtResource("1_yc0tu")
+
+[node name="MarginContainer" parent="." unique_id=1829965493 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer2" parent="." unique_id=2129779094 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer3" parent="." unique_id=500435454 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer4" parent="." unique_id=1173927358 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer5" parent="." unique_id=421755067 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer6" parent="." unique_id=910889368 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer7" parent="." unique_id=258537693 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer8" parent="." unique_id=873737019 instance=ExtResource("2_yc0tu")]
+layout_mode = 2
+
+[node name="MarginContainer9" parent="." unique_id=1647596993 instance=ExtResource("2_yc0tu")]
+layout_mode = 2

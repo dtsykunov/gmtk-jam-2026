@@ -17,10 +17,10 @@ const KEY_ICON_FILES := {
 var _key_icons: Dictionary[Key, Texture2D] = {}
 
 @onready var _icon_rects: Array[TextureRect] = [
-	$HBoxContainer/TextureRect,
-	$HBoxContainer/TextureRect2,
-	$HBoxContainer/TextureRect3,
-	$HBoxContainer/TextureRect4,
+	%TextureRect,
+	%TextureRect2,
+	%TextureRect3,
+	%TextureRect4,
 ]
 
 
