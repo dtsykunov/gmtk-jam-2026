@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b70k3m1utqn6g" path="res://scenes/credits/scrolling_credits.tscn" id="1_0sycx"]
 [ext_resource type="Script" uid="uid://br1857twdktc8" path="res://scenes/end_credits/end_credits.gd" id="2_2v40y"]
+[ext_resource type="PackedScene" uid="uid://dexn3yhrf1160" path="res://scenes/credits/background/background.tscn" id="3_2v40y"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_game_template/base/nodes/music_players/background_music_player.tscn" id="3_bfvdl"]
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_game_template/base/nodes/utilities/capture_focus.gd" id="4_1kqi1"]
 
@@ -9,19 +10,31 @@
 script = ExtResource("2_2v40y")
 main_menu_scene_path = ""
 force_mouse_mode_visible = false
+scroll_paused = true
 
-[node name="BackgroundMusicPlayer" parent="." index="0" unique_id=694489322 instance=ExtResource("3_bfvdl")]
+[node name="CreditsScene" parent="." index="0" unique_id=1888764296 instance=ExtResource("3_2v40y")]
 
-[node name="BackgroundColor" type="ColorRect" parent="." index="1" unique_id=1066796700]
+[node name="ФонИгры" parent="CreditsScene" index="0" unique_id=935028732]
+z_index = -3
+
+[node name="Player" parent="CreditsScene" index="1" unique_id=1442930848]
+z_index = -1
+
+[node name="Enemy" parent="CreditsScene" index="2" unique_id=1412845564]
+z_index = -1
+
+[node name="BackgroundMusicPlayer" parent="." index="1" unique_id=694489322 instance=ExtResource("3_bfvdl")]
+
+[node name="BackgroundColor" type="ColorRect" parent="." index="2" unique_id=1066796700]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.35500002)
 
-[node name="BackgroundTextureRect" type="TextureRect" parent="." index="2" unique_id=750434571]
+[node name="BackgroundTextureRect" type="TextureRect" parent="." index="3" unique_id=750434571]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +44,73 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CenterContainer" type="CenterContainer" parent="." index="4" unique_id=1359614302]
+[node name="ScrollContainer" parent="." index="4" unique_id=392334416]
+scroll_vertical = 2114
+
+[node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(1082586754) index="1" unique_id=962973358]
+text = "[font_size=48]Collaborators[/font_size]
+
+[font_size=32]Art[/font_size]
+Author: [url=https://dariarty21.itch.io/]Daria Vladimirova[/url]  
+
+[font_size=32]Programming[/font_size]
+Author: [url=https://dtsykunov.itch.io/]Dima Tsykunov[/url]
+
+[font_size=48]Sourced[/font_size]
+
+[font_size=24]Vertigo by Ovani Sound (Music)[/font_size]
+Author: [url=https://ovanisound.com]Ovani Sound[/url]  
+Source: [url=https://ovanisound.com/]ovanisound.com[/url]
+License: [url=https://ovanisound.com/policies/terms-of-service]Royalty-Free License[/url]
+
+[font_size=24]Kenney Input Prompts[/font_size]
+Author: [url=https://kenney.nl/]Kenney[/url]  
+Source: [url=https://kenney.nl/assets/input-prompts]kenney.nl : input-prompts[/url]  
+License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0[/url]
+
+[font_size=24]Monoton (font)[/font_size]
+Author: Vernon Adams
+Source: [url=https://fonts.google.com/specimen/Monoton]fonts.google.com : Monoton[/url]  
+License: [url=https://fonts.google.com/specimen/Monoton/license?preview.script=Latn]SIL OPEN FONT LICENSE Version 1.1[/url]
+
+[font_size=24]Work Sans (font)[/font_size]
+Author: Wei Huang
+Source: [url=https://fonts.google.com/specimen/Work+Sans]fonts.google.com : Work Sans[/url]  
+License: [url=https://fonts.google.com/specimen/Work+Sans/license]SIL OPEN FONT LICENSE Version 1.1[/url]
+
+[font_size=24]Godot Engine Logo[/font_size]
+Author: Andrea Calabró  
+Source: [url=https://godotengine.org/press/]godotengine.org : press[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt]CC BY 4.0 International[/url] 
+
+[font_size=24]Git Logo[/font_size]
+Author: [url=https://bsky.app/profile/jasonlong.me]Jason Long[/url]  
+Source: [url=https://git-scm.com/downloads/logos]git-scm.com : logos[/url]  
+License: [url=https://creativecommons.org/licenses/by/3.0/]CC BY 3.0[/url]
+
+[font_size=24]Godot Game Template[/font_size]
+Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
+Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
+License: [url=LICENSE.txt]MIT License[/url]  
+
+[font_size=24]Retro neon perspective grid floor background (Designed by Magnific)[/font_size]
+Author: [url=https://www.magnific.com/author/starline]starline[/url]  
+Source: [url=https://www.magnific.com/free-vector/retro-neon-perspective-grid-floor-background_14649483.htm]magnific.com[/url]  
+License: [url=https://www.magnific.com/ai/docs/licenses-attribution#merchandise-license]Free[/url]
+
+[font_size=48]Tools[/font_size]
+[font_size=24]Godot[/font_size]
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
+Source: [url=https://godotengine.org/]godotengine.org[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]  
+
+[font_size=24]Git[/font_size]
+Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
+Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
+License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
+"
+
+[node name="CenterContainer" type="CenterContainer" parent="." index="5" unique_id=1359614302]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,7 +120,6 @@ mouse_filter = 2
 
 [node name="EndMessagePanel" type="Panel" parent="CenterContainer" index="0" unique_id=1272765948]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(360, 120)
 layout_mode = 2
 
@@ -86,3 +164,5 @@ text = "Menu"
 
 [connection signal="pressed" from="CenterContainer/EndMessagePanel/VBoxContainer/CenterContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CenterContainer/EndMessagePanel/VBoxContainer/CenterContainer/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+
+[editable path="CreditsScene"]
