@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://1yh65qh4gdld" path="res://scenes/character/enemy.gd" id="6_enemyc"]
 [ext_resource type="PackedScene" uid="uid://cukerjdra6irn" path="res://scenes/game_scene/move_control/move_control.tscn" id="8_njun1"]
 [ext_resource type="PackedScene" uid="uid://booopyflpmbje" path="res://scenes/game_scene/move_history/move_history.tscn" id="9_vyne5"]
+[ext_resource type="PackedScene" uid="uid://b2gho14t7pxdp" path="res://scenes/dialog_screen/DialogScreen.tscn" id="10_03owc"]
 
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
@@ -21,7 +22,7 @@ player_controller = NodePath("Player/PlayerController")
 enemy_controller = NodePath("Enemy/EnemyController")
 
 [node name="StartTimer" type="Timer" parent="GameController" unique_id=448852661]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="Countdown" type="Timer" parent="GameController" unique_id=593977127]
@@ -142,7 +143,22 @@ offset_right = 201.0
 offset_bottom = 568.0
 scale = Vector2(0.5, 0.5)
 
+[node name="Dialog" parent="CanvasLayer/Control" unique_id=1023414024 instance=ExtResource("10_03owc")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 129.0
+offset_right = -15.0
+offset_bottom = 129.0
+
 [connection signal="timeout" from="GameController/StartTimer" to="GameController" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="GameController/Countdown" to="GameController" method="_on_countdown_timeout"]
 [connection signal="timeout" from="GameController/RoundPauseTimer" to="GameController" method="_on_round_pause_timeout"]
 [connection signal="timeout" from="GameController/Enemy/EnemyController/MoveTimer" to="GameController/Enemy/EnemyController" method="_on_move_timer_timeout"]
+[connection signal="revealed" from="CanvasLayer/Control/Dialog" to="GameController" method="_on_dialog_revealed"]

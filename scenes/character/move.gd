@@ -30,14 +30,14 @@ func _to_string() -> String:
 func get_inputs() -> Array[String]:
 	var inputs: Array[String] = []
 
-	if stance == Character.Stance.SITTING:
-		inputs.append("sit")
-
 	if arm_l == Character.ArmPose.RAISED:
 		inputs.append("right_arm_up")
 
 	if arm_r == Character.ArmPose.RAISED:
 		inputs.append("left_arm_up")
+
+	if stance == Character.Stance.SITTING:
+		inputs.append("sit")
 
 	if hips == Character.HipsPose.LEFT:
 		inputs.append("hips_left")

@@ -24,6 +24,8 @@ signal difficulty_changed(difficulty: int)
 
 @onready var move_history: MoveHistory = %MoveHistory
 
+@onready var dialog: DialogScreen = %Dialog
+
 var score := 0
 
 var cur_difficulty := 0
@@ -43,9 +45,9 @@ static var LEVELS: Dictionary[int, LevelInfo] = {
 	# Okay, how about this?
 	3: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.EASY, 1.0),
 	4: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.MEDIUM, 1.0),
-	5: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0),
+	# 5: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0),
 
-	6: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
+	5: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/1.txt"),
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/2.txt"),
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/3.txt"),
@@ -60,7 +62,7 @@ static var LEVELS: Dictionary[int, LevelInfo] = {
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/easy_recordings/6.txt"),
 	]),
 
-	7: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
+	6: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/1.txt"),
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/2.txt"),
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/3.txt"),
@@ -74,7 +76,7 @@ static var LEVELS: Dictionary[int, LevelInfo] = {
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/medium_recordings/11.txt"),
 	]),
 
-	8: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
+	7: LevelInfo.new(5, 5.0, 3, Character.MoveDifficulty.HARD, 1.0, [
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/1.txt"),
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/2.txt"),
 		Round.load_from_file("res://scenes/dev_tools/move_recorder/hard_recordings/3.txt"),
@@ -93,6 +95,26 @@ static var LEVELS: Dictionary[int, LevelInfo] = {
 
 }
 var MAX_LEVEL : int = LEVELS.keys().max()
+
+static var LEVELS_DIALOG: Dictionary[int, Array] = {
+	0: [
+		["Hey, buddy", 0.75, 1.0],
+		["Do you really think you have what it takes to outdance me?", 3.0, 2.0],
+		["Are you even flexible enough? Try and show me.", 3.0, 2.0],
+	],
+	1: [
+		["Sure, you can repeat basic instructions. What about this?", 2.0, 2.0]
+	],
+	3: [
+		["Okay, fine. But are you quick enough?", 2.0, 2.0],
+	],
+	5: [
+		["Let's get serious! You'll have to try better if you want to take my place as disco god.", 2.0, 2.0],
+	],
+	7: [
+		["You'll never take my place!!!", 2.0, 2.0],
+	],
+}
 
 
 # Called when the node enters the scene tree for the first time.
@@ -142,6 +164,7 @@ func _finish_round(matched: bool) -> void:
 			return
 		setup_level()
 		lvl_started.emit(cur_level_info)
+		await _play_level_dialog(cur_difficulty)
 
 	round_pause_timer.wait_time = pause_time
 	round_pause_timer.start()
@@ -154,6 +177,7 @@ func _on_round_pause_timeout() -> void:
 func _on_start_timer_timeout() -> void:
 	setup_level()
 	lvl_started.emit(cur_level_info)
+	await _play_level_dialog(cur_difficulty)
 	start_round()
 
 
@@ -194,6 +218,22 @@ func setup_level() -> void:
 		next_lvl_rounds.append(Round.new(timed_moves))
 
 	lvl_rounds = next_lvl_rounds
+
+
+
+
+func _on_dialog_revealed() -> void:
+	pass # Replace with function body.
+
+
+func _play_level_dialog(difficulty: int) -> void:
+	if not LEVELS_DIALOG.has(difficulty):
+		return
+
+	dialog.visible = true
+	for line in LEVELS_DIALOG[difficulty]:
+		await dialog.set_text(line[0], line[1], line[2])
+	dialog.visible = false
 
 
 class TimedMove:
