@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dexn3yhrf1160"]
+
+[ext_resource type="Script" uid="uid://clasx123jg85r" path="res://scenes/credits/background/background.gd" id="1_ho12v"]
+[ext_resource type="Texture2D" uid="uid://udhjp5ulpwhv" path="res://assets/backgrounds/фон игры.jpg" id="2_5sm1r"]
+[ext_resource type="PackedScene" uid="uid://bywkrawu7kg04" path="res://scenes/character/good_guy/good_guy.tscn" id="4_8c5sh"]
+[ext_resource type="PackedScene" uid="uid://k44r4j8xt4x8" path="res://scenes/character/character.tscn" id="6_0v0b8"]
+[ext_resource type="Script" uid="uid://1yh65qh4gdld" path="res://scenes/character/enemy.gd" id="7_iiiog"]
+
+[node name="CreditsScene" type="Node2D" unique_id=1888764296]
+script = ExtResource("1_ho12v")
+
+[node name="ФонИгры" type="Sprite2D" parent="." unique_id=935028732]
+z_index = -1
+position = Vector2(647, 310)
+scale = Vector2(0.20997, 0.35588136)
+texture = ExtResource("2_5sm1r")
+
+[node name="Player" parent="." unique_id=1442930848 instance=ExtResource("4_8c5sh")]
+position = Vector2(967, 325)
+scale = Vector2(0.55, 0.55)
+
+[node name="PlayerEnemyController" type="Node" parent="Player" unique_id=332497172]
+unique_name_in_owner = true
+script = ExtResource("7_iiiog")
+
+[node name="MoveTimer" type="Timer" parent="Player/PlayerEnemyController" unique_id=1863698310]
+one_shot = true
+
+[node name="Enemy" parent="." unique_id=1412845564 instance=ExtResource("6_0v0b8")]
+position = Vector2(325, 325)
+scale = Vector2(0.55, 0.55)
+
+[node name="EnemyController" type="Node" parent="Enemy" unique_id=1344255539]
+unique_name_in_owner = true
+script = ExtResource("7_iiiog")
+
+[node name="MoveTimer" type="Timer" parent="Enemy/EnemyController" unique_id=178067697]
+one_shot = true
+
+[connection signal="moves_shown" from="Player/PlayerEnemyController" to="." method="_on_player_enemy_controller_moves_shown"]
+[connection signal="timeout" from="Player/PlayerEnemyController/MoveTimer" to="Player/PlayerEnemyController" method="_on_move_timer_timeout"]
+[connection signal="timeout" from="Enemy/EnemyController/MoveTimer" to="Enemy/EnemyController" method="_on_move_timer_timeout"]

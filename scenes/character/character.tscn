@@ -629,10 +629,10 @@ tracks/0/path = NodePath("Hip:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(5, 54), Vector2(5, 154)]
+"values": [Vector2(5, 154)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -641,10 +641,10 @@ tracks/1/path = NodePath("Hip/Torso/Leg_R:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.095459476, 0.98262036]
+"values": [0.98262036]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -653,10 +653,10 @@ tracks/2/path = NodePath("Hip/Torso/Leg_L:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.02025368, -1.0524335]
+"values": [-1.0524335]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -665,10 +665,10 @@ tracks/3/path = NodePath("Hip/Torso/Leg_R/Sheen_R:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.10164873, -1.5568337]
+"values": [-1.5568337]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -677,10 +677,10 @@ tracks/4/path = NodePath("Hip/Torso/Leg_L/Sheen_L:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.10164873, 1.6249015]
+"values": [1.6249015]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -689,10 +689,10 @@ tracks/5/path = NodePath("Hip/Torso/Leg_R/Sheen_R/Foot_R:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0, 0.567232]
+"values": [0.567232]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -701,10 +701,10 @@ tracks/6/path = NodePath("Hip/Torso/Leg_L/Sheen_L/Foot_L:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0, -0.49741885]
+"values": [-0.49741885]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -713,10 +713,10 @@ tracks/7/path = NodePath("Hip/Torso/Leg_L/BadGuyLegL720p:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-0.10442352, 41.10309), Vector2(38.120182, 42.798573)]
+"values": [Vector2(38.120182, 42.798573)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -725,10 +725,10 @@ tracks/8/path = NodePath("Hip/Torso/Leg_R/BadGuyLegR720p:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-13.766577, 35.665123), Vector2(-45.948975, 58.42723)]
+"values": [Vector2(-45.948975, 58.42723)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -737,10 +737,10 @@ tracks/9/path = NodePath("Hip/Torso/Leg_L/Sheen_L/BadGuySheenL720p:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(34.528587, 9.722931), Vector2(-33.6254, 3.3447912)]
+"values": [Vector2(-33.6254, 3.3447912)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -749,10 +749,10 @@ tracks/10/path = NodePath("Hip/Torso/Leg_R/Sheen_R/BadGuySheenR720p:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-20.159805, 9.066004), Vector2(9.916522, 7.7053156)]
+"values": [Vector2(9.916522, 7.7053156)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -761,10 +761,10 @@ tracks/11/path = NodePath("Hip/Torso/Leg_L/Sheen_L/Foot_L/BadGuyFootL720p:positi
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(34.63023, -36.83293), Vector2(11.640331, -58.07911)]
+"values": [Vector2(11.640331, -58.07911)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -773,10 +773,10 @@ tracks/12/path = NodePath("Hip/Torso/Leg_R/Sheen_R/Foot_R/BadGuyFootR720p:positi
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-44.455616, -51.46474), Vector2(-44.455616, -51.46474)]
+"values": [Vector2(-44.455616, -51.46474)]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
@@ -785,10 +785,10 @@ tracks/13/path = NodePath("Hip/Torso/Leg_R/BadGuyLegR720p:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [-0.17685452]
+"values": []
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -797,10 +797,10 @@ tracks/14/path = NodePath("Hip/Torso/Leg_L/BadGuyLegL720p:rotation")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.02025368, -0.02025368]
+"values": [-0.02025368]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
@@ -809,10 +809,10 @@ tracks/15/path = NodePath("Hip/Torso/Leg_R/Sheen_R/BadGuySheenR720p:rotation")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.006981317, -0.006981317]
+"values": [-0.006981317]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
@@ -821,10 +821,10 @@ tracks/16/path = NodePath("Hip/Torso/Leg_L/Sheen_L/BadGuySheenL720p:rotation")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [0.08139505]
+"values": []
 }
 tracks/17/type = "value"
 tracks/17/imported = false
@@ -833,10 +833,10 @@ tracks/17/path = NodePath("Hip/Torso/Leg_L/Sheen_L/Foot_L/BadGuyFootL720p:rotati
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.06400374, 0.13579208]
+"values": [0.13579208]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
@@ -845,10 +845,10 @@ tracks/18/path = NodePath("Hip/Torso/Leg_R/Sheen_R/Foot_R/BadGuyFootR720p:rotati
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.03836602, 0.03836602]
+"values": [0.03836602]
 }
 
 [sub_resource type="Animation" id="Animation_bix7t"]

@@ -1,3 +1,4 @@
+class_name GameController
 extends Node
 
 signal lvl_started(lvl_info: LevelInfo)
