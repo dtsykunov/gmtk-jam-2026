@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cukerjdra6irn" path="res://scenes/game_scene/move_control/move_control.tscn" id="8_njun1"]
 [ext_resource type="PackedScene" uid="uid://booopyflpmbje" path="res://scenes/game_scene/move_history/move_history.tscn" id="9_vyne5"]
 [ext_resource type="PackedScene" uid="uid://b2gho14t7pxdp" path="res://scenes/dialog_screen/DialogScreen.tscn" id="10_03owc"]
+[ext_resource type="PackedScene" uid="uid://b4ej682b1f4in" path="res://scenes/game_slider/game_slider.tscn" id="12_gydcf"]
 
 [node name="Level0" type="Node2D" unique_id=1888764296]
 script = ExtResource("1_xcm4a")
@@ -106,9 +107,9 @@ text = "0"
 [node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=683467092]
 layout_mode = 0
 offset_left = 921.0
-offset_top = 70.0
+offset_top = 89.0
 offset_right = 1033.0
-offset_bottom = 143.0
+offset_bottom = 162.0
 theme_override_font_sizes/font_size = 53
 text = "YOU"
 
@@ -150,6 +151,15 @@ offset_top = -285.0
 offset_right = 187.00006
 offset_bottom = 459.0
 scale = Vector2(0.625, 0.625)
+
+[node name="GameSlider" parent="CanvasLayer/Control" unique_id=423938659 instance=ExtResource("12_gydcf")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 240.0
+offset_top = -98.0
+offset_right = 247.8153
+offset_bottom = -325.6348
+scale = Vector2(0.639769, 0.639769)
 
 [node name="Dialog" parent="CanvasLayer/Control" unique_id=1023414024 instance=ExtResource("10_03owc")]
 unique_name_in_owner = true

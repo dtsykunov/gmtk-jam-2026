@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://b4ej682b1f4in"]
+
+[ext_resource type="Script" uid="uid://c06s3je3s20ym" path="res://scenes/game_slider/game_slider.gd" id="1_ea211"]
+
+[sub_resource type="DPITexture" id="DPITexture_thtcs"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".75\"/></svg>
+"
+base_scale = 0.01
+
+[sub_resource type="DPITexture" id="DPITexture_ea211"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+base_scale = 0.01
+
+[sub_resource type="DPITexture" id="DPITexture_21anw"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
+"
+base_scale = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thtcs"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.079312794, 0.123046584, 0.2944392, 0.6)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 6
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea211"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 1, 0.79118866, 1)
+border_width_left = 6
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_top = 16.0
+expand_margin_bottom = 16.0
+
+[node name="GameSlider" type="HSlider" unique_id=423938659]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("DPITexture_thtcs")
+theme_override_icons/grabber_highlight = SubResource("DPITexture_ea211")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_21anw")
+theme_override_styles/slider = SubResource("StyleBoxFlat_thtcs")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ea211")
+value = 50.0
+editable = false
+scrollable = false
+script = ExtResource("1_ea211")

@@ -25,8 +25,12 @@ signal difficulty_changed(difficulty: int)
 @onready var move_history: MoveHistory = %MoveHistory
 
 @onready var dialog: DialogScreen = %Dialog
+@onready var game_slider: GameSlider = %GameSlider
+
+const WIN_THRESHOLD := 0.9
 
 var score := 0
+var total_rounds := 0
 
 var cur_difficulty := 0
 var cur_level_info : LevelInfo = null
@@ -133,6 +137,10 @@ func _ready() -> void:
 	player_controller.move_changed.connect(_on_player_move_changed)
 	enemy_controller.move_changed.connect(_on_enemy_move_changed)
 
+	total_rounds = _total_round_count()
+	game_slider.max_value = total_rounds
+	game_slider.value = 0
+
 	start_timer.start()
 
 
@@ -158,6 +166,7 @@ func _finish_round(matched: bool) -> void:
 	if matched:
 		score += 1
 		score_label.text = str(score)
+		game_slider.value = score
 
 	var pause_time := cur_level_info.pause_time
 
@@ -165,7 +174,10 @@ func _finish_round(matched: bool) -> void:
 		cur_difficulty += 1
 		if cur_difficulty > MAX_LEVEL:
 			lvl_finished.emit(cur_level_info)
-			get_parent().level_won.emit() # TODO
+			if score >= total_rounds * WIN_THRESHOLD:
+				get_parent().level_won.emit("")
+			else:
+				get_parent().level_lost.emit()
 			return
 		setup_level()
 		lvl_started.emit(cur_level_info)
@@ -225,6 +237,15 @@ func setup_level() -> void:
 	lvl_rounds = next_lvl_rounds
 
 
+func _total_round_count() -> int:
+	var total := 0
+	for difficulty in LEVELS.keys():
+		var info: LevelInfo = LEVELS[difficulty]
+		if not info.rounds.is_empty():
+			total += info.rounds.size()
+		else:
+			total += info.round_count
+	return total
 
 
 func _on_dialog_revealed() -> void:

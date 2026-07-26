@@ -39,7 +39,7 @@ Author: [Jason Long](https://bsky.app/profile/jasonlong.me)
 Source: [git-scm.com : logos](https://git-scm.com/downloads/logos)  
 License: [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 
-### Godot Game Template
+#### Godot Game Template
 Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)  
 Source: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)  
 License: [MIT License](LICENSE.txt)  
