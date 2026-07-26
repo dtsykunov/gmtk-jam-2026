@@ -100,7 +100,8 @@ static var LEVELS_DIALOG: Dictionary[int, Array] = {
 	0: [
 		["Hey, buddy", 0.75, 1.0],
 		["Do you really think you have what it takes to outdance me?", 3.0, 2.0],
-		["Are you even flexible enough? Try and show me.", 3.0, 2.0],
+		["Are you even flexible enough?", 2.0, 1.5],
+		["Show me how you shake those hips!", 2.0, 2.0],
 	],
 	1: [
 		["Sure, you can repeat basic instructions. What about this?", 2.0, 2.0]
@@ -109,10 +110,14 @@ static var LEVELS_DIALOG: Dictionary[int, Array] = {
 		["Okay, fine. But are you quick enough?", 2.0, 2.0],
 	],
 	5: [
-		["Let's get serious! You'll have to try better if you want to take my place as disco god.", 2.0, 2.0],
+		["You'll have to try better if you want to take my place as disco god!", 2.0, 1.0],
+		["Let's get serious now!", 1.0, 2.0],
+	],
+	6: [
+		["You'll never take my place!!!", 2.0, 2.0],
 	],
 	7: [
-		["You'll never take my place!!!", 2.0, 2.0],
+		["NOOOO!!!", 0.75, 2.0],
 	],
 }
 
