@@ -114,7 +114,7 @@ static var LEVELS_DIALOG: Dictionary[int, Array] = {
 		["Okay, fine. But are you quick enough?", 2.0, 2.0],
 	],
 	5: [
-		["You'll have to try better if you want to take my place as disco god!", 2.0, 1.0],
+		["You'll have to try better if you want to take my place as disco god!", 2.0, 2.0],
 		["Let's get serious now!", 1.0, 2.0],
 	],
 	6: [

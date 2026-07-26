@@ -49,6 +49,17 @@ corner_radius_bottom_left = 16
 expand_margin_top = 16.0
 expand_margin_bottom = 16.0
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ea211"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+color = Color(0.85656595, 8.548021e-05, 0.6821481, 1)
+grow_begin = 0.0
+grow_end = 4.0
+thickness = 10
+vertical = true
+
 [node name="GameSlider" type="HSlider" unique_id=423938659]
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,4 +74,22 @@ theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ea211")
 value = 50.0
 editable = false
 scrollable = false
+tick_count = 10
+ticks_on_borders = true
 script = ExtResource("1_ea211")
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=1441153072]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 491.0
+offset_top = -18.0
+offset_right = 495.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.821895, 0.821895)
+theme_override_styles/separator = SubResource("StyleBoxLine_ea211")
